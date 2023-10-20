@@ -21,7 +21,8 @@ function createSearchCard(movie) {
     col.classList.add("col");
 
     const card = document.createElement("div");
-    card.classList.add("card", "pop_card");
+    card.classList.add("card", "card_", "pop_card");
+    card.dataset.id = movie.id;
 
     const img = document.createElement("img");
     img.classList.add("card-img-top");
@@ -65,7 +66,7 @@ function updateCardContent() {
     const cards = document.querySelectorAll(".pop_card");
 
     console.log(currentPopShow);
-    cards.forEach((card, idx) => {
+    cards.map((card, idx) => {
         const movie = popularMovies[currentPopShow + idx];
         
         card.querySelector("img").src = posterURL + movie.poster_path;

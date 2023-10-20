@@ -11,6 +11,7 @@
   <link href="../css/search.css" rel="stylesheet">
   <link href="../css/slidebar.css" rel="stylesheet">
   <link href="../css/card.css" rel="stylesheet">
+  <link href="../css/detail.css" rel="stylesheet">
 </head>
 
 <body>
@@ -51,7 +52,7 @@
     <div class="slide_box pop_slide">
       <div class="slide_list">
         <div class="card_box">
-          <div class="card pop_card">
+          <div data-id="" class="card card_ pop_card">
             <img src="..." class="card-img-top" alt="...">
             <button type="button" class="detail_button btn btn-danger">상세보기</button>
             <span class="movie_title"></span>
@@ -60,7 +61,7 @@
           </div>
         </div>
         <div class="card_box">
-          <div class="card pop_card">
+          <div data-id="" class="card card_ pop_card">
             <img src="..." class="card-img-top" alt="...">
             <button type="button" class="detail_button btn btn-danger">상세보기</button>
             <span class="movie_title"></span>
@@ -69,7 +70,7 @@
           </div>
         </div>
         <div class="card_box">
-          <div class="card pop_card">
+          <div data-id="" class="card card_ pop_card">
             <img src="..." class="card-img-top" alt="...">
             <button type="button" class="detail_button btn btn-danger">상세보기</button>
             <span class="movie_title"></span>
@@ -78,7 +79,7 @@
           </div>
         </div>
         <div class="card_box">
-          <div class="card pop_card">
+          <div data-id="" class="card card_ pop_card">
             <img src="..." class="card-img-top" alt="...">
             <button type="button" class="detail_button btn btn-danger">상세보기</button>
             <span class="movie_title"></span>
@@ -87,7 +88,7 @@
           </div>
         </div>
         <div class="card_box">
-          <div class="card pop_card">
+          <div data-id="" class="card card_ pop_card">
             <img src="..." class="card-img-top" alt="...">
             <button type="button" class="detail_button btn btn-danger">상세보기</button>
             <span class="movie_title"></span>
@@ -106,7 +107,7 @@
     <div class="slide_box play_slide">
       <div class="slide_list">
         <div class="card_box">
-          <div class="card play_card">
+          <div data-id="" class="card card_ play_card">
             <img src="..." class="card-img-top" alt="...">
             <button type="button" class="detail_button btn btn-danger">상세보기</button>
             <span class="movie_title"></span>
@@ -115,7 +116,7 @@
           </div>
         </div>
         <div class="card_box">
-          <div class="card play_card">
+          <div data-id="" class="card card_ play_card">
             <img src="..." class="card-img-top" alt="...">
             <button type="button" class="detail_button btn btn-danger">상세보기</button>
             <span class="movie_title"></span>
@@ -124,7 +125,7 @@
           </div>
         </div>
         <div class="card_box">
-          <div class="card play_card">
+          <div data-id="" class="card card_ play_card">
             <img src="..." class="card-img-top" alt="...">
             <button type="button" class="detail_button btn btn-danger">상세보기</button>
             <span class="movie_title"></span>
@@ -133,7 +134,7 @@
           </div>
         </div>
         <div class="card_box">
-          <div class="card play_card">
+          <div data-id="" class="card card_ play_card">
             <img src="..." class="card-img-top" alt="...">
             <button type="button" class="detail_button btn btn-danger">상세보기</button>
             <span class="movie_title"></span>
@@ -142,7 +143,7 @@
           </div>
         </div>
         <div class="card_box">
-          <div class="card play_card">
+          <div data-id="" class="card card_ play_card">
             <img src="..." class="card-img-top" alt="...">
             <button type="button" class="detail_button btn btn-danger">상세보기</button>
             <span class="movie_title"></span>
@@ -156,6 +157,29 @@
     </div>
   </section>
 
+  <div class="hide_block">
+    <div class="card mb-3 detail_card" style="max-width: 540px;">
+      <div class="detail_delete">
+        X
+      </div>
+      <div class="row g-0">
+        <div class="col-md-4">
+          <img src="..." class="img-fluid rounded-start detail_img" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title detail_title">Card title</h5>
+            <p class="card-text detail_description">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text detail_average"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  
+
 
 
 
@@ -166,6 +190,7 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="../js/secret.js"></script>
+  <script src="../js/detail.js"></script>
   <script src="../js/search.js"></script>
   <script src="../js/playSlide.js"></script>
   <script src="../js/popSlide.js"></script>

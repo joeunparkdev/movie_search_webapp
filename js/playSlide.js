@@ -26,6 +26,7 @@ function updatePlayCardContent() {
     cards.forEach((card, idx) => {
         const movie = playMovies[currentPlayShow + idx];
 
+        card.dataset.id = movie.id; 
         card.querySelector("img").src = posterURL + movie.poster_path;
         card.querySelector(".movie_title").textContent = movie.title;
         card.querySelector(".movie_overview").textContent = movie.overview;

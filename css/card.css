@@ -2,7 +2,7 @@
     width: 17%;
 }
 
-.card {
+.card_ {
     width: 100%;
 
     display: flex;
@@ -23,15 +23,15 @@
     font-weight: bold;
 }
 
-.card img {
+.card_ img {
     height: 280px;
 }
 
-.card .detail_button {
+.card_ .detail_button {
     display: none;
     position: absolute;
 }
 
-.card .movie_overview, .movie_average {
+.card_ .movie_overview, .movie_average {
     display:none;
 }
