@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Movie Detail</title>
+</head>
+
+<body>
+  <h1>영화 상세 정보</h1>
+
+  <div class="movie_info_container">
+
+    <div class="detail_img_container">
+      <img class="detail_img" src="" alt="Movie Poster">
+    </div>
+
+    <div class="detail_title_container">
+      <h2 class="detail_title"></h2>
+    </div>
+
+    <div class="detail_description_container">
+      <p class="detail_description"></p>
+    </div>
+
+    <div class="detail_average_container">
+      <p><span class='label'>평점: </span><span class='value detail_average'></span></p>
+    </div>
+  </div>
+
+  <section id='review-section'>
+
+    <h2>리뷰</h2>
+
+    <form id='review-form'>
+      <label>이름:</label>
+      <input type='text' id='reviewer-name'><br />
+      <label>내용:</label>
+      <textarea id='review-content' rows="5" cols="50"></textarea><br />
+      <label>점수:</label>
+      <select id='score-select'>
+        <option value='5'>5점</option>
+        <option value='4'>4점</option>
+        <option value='3'>3점</option>
+        <option value='2'>2점</option>
+        <option value='1'>1점</option>
+      </select><br />
+      <input type=submit value=Submit>
+    </form>
+  </section>
+  <script src='../js//detail-page.js'></script>
+</body>
+
+</html>
