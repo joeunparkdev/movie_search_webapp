@@ -21,7 +21,7 @@ function initEventCard(card) {
       const movieId = target.dataset.id;
 
       localStorage.setItem(
-        "movieData",
+        `movieData-${movieId}`,
         JSON.stringify({
           poster_url: target.querySelector("img").src,
           title: target.querySelector(".movie_title").textContent,
