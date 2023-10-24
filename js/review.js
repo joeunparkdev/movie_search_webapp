@@ -1,14 +1,15 @@
 const reviewForm = document.getElementById("review-form");
 const reviews = document.getElementById("reviews-list");
 
-let nextId = localStorage.getItem("nextId")
-  ? parseInt(localStorage.getItem("nextId"))
-  : 1;
-
 // Load reviews from local storage when the page loads
 const storedReviews = JSON.parse(
   localStorage.getItem("reviews") || "[]"
 );
+
+let nextId =
+  storedReviews.length > 0
+    ? Math.max(...storedReviews.map((review) => review.id)) + 1
+    : 1;
 
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get("id");

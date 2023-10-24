@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <title>Movie Detail</title>
   <link rel="stylesheet" href="../css/detail-page.css">
-  <script defer src="../js/review.js"></script>
 </head>
 
 <body>
@@ -34,30 +33,31 @@
     <form id='review-form'>
       <div class="comment_block">
         <div class="comment_head">
-            <input type="text" id="name" class="comment_name" placeholder="닉네임">
-            <input type="password" id= "password" class="comment_password" placeholder="암호">
+          <input type="text" id="name" class="comment_name" placeholder="닉네임">
+          <input type="password" id="password" class="comment_password" placeholder="암호">
         </div>
         <div class="comment_body">
           <div class="comment_content">
-              <textarea type="text" class="comment_text" id="review" placeholder="리뷰 한줄평을 입력하세요"></textarea>
+            <textarea type="text" class="comment_text" id="review" placeholder="리뷰 한줄평을 입력하세요"></textarea>
           </div>
+        </div>
+
+        <label>점수:</label>
+        <select id='score-select'>
+          <option value='5'>5점</option>
+          <option value='4'>4점</option>
+          <option value='3'>3점</option>
+          <option value='2'>2점</option>
+          <option value='1'>1점</option>
+        </select><br />
+        <input type=submit value=Submit>
       </div>
- 
-      <label>점수:</label>
-      <select id='score-select'>
-        <option value='5'>5점</option>
-        <option value='4'>4점</option>
-        <option value='3'>3점</option>
-        <option value='2'>2점</option>
-        <option value='1'>1점</option>
-      </select><br />
-      <input type=submit value=Submit>
-    </div>
     </form>
 
     <ul id='reviews-list'></ul>
   </section>
   <script src='../js//detail-page.js'></script>
+  <script defer src="../js/review.js"></script>
 </body>
 
 </html>
