@@ -40,3 +40,15 @@ body {
 #reviews-list {
   width: 50%;
 }
+
+.delete-button {
+  background-color: #ff5555; 
+  color: white; 
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #ff0000;
+}
