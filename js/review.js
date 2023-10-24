@@ -1,9 +1,8 @@
 const reviewForm = document.getElementById("review-form");
 const reviews = document.getElementById("reviews-list");
 
-let nextId = localStorage.getItem("nextId")
-  ? parseInt(localStorage.getItem("nextId"))
-  : 1;
+let nextId =
+  Math.max(0, ...storedReviews.map((review) => review.id)) + 1;
 
 // Load reviews from local storage when the page loads
 const storedReviews = JSON.parse(
