@@ -15,14 +15,14 @@ body {
 }
 
 .item {
-  width: 50%;
+  inline-size: 50%;
   padding: 10px;
 }
 
 .detail_img {
-  max-width: 100%;
-  height: auto;
-  max-height: 500px;
+  max-inline-size: 100%;
+  block-size: auto;
+  max-block-size: 500px;
   margin: 0 auto;
 }
 
@@ -31,14 +31,14 @@ body {
 }
 
 #review-section {
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   flex-wrap: wrap;
 }
 
 #review-form,
 #reviews-list {
-  width: 50%;
+  inline-size: 50%;
 }
 
 .delete-button {
