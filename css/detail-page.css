@@ -1,12 +1,12 @@
 * {
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
 }
 
 body {
   display: flex;
-  flex-direction: column; 
-  text-align: center; 
+  flex-direction: column;
+  text-align: center;
 }
 
 .container {
@@ -15,14 +15,14 @@ body {
 }
 
 .item {
-  width: 50%;
+  inline-size: 50%;
   padding: 10px;
 }
 
 .detail_img {
-  max-width: 100%;
-  height: auto;
-  max-height: 500px;
+  max-inline-size: 100%;
+  block-size: auto;
+  max-block-size: 500px;
   margin: 0 auto;
 }
 
@@ -31,12 +31,36 @@ body {
 }
 
 #review-section {
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   flex-wrap: wrap;
 }
 
 #review-form,
 #reviews-list {
-  width: 50%;
+  inline-size: 50%;
+}
+
+.delete-button {
+  background-color: #ff5555;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #ff0000;
+}
+
+.edit-button {
+  background-color: #ff5555;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #ff0000;
 }
