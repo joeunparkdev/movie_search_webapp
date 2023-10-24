@@ -25,19 +25,23 @@
     </div>
 
     <div class="detail_average_container">
-      <p><span class='label'>평점: </span><span class='value detail_average'></span></p>
+      <p><span class='label'></span><span class='value detail_average'></span></p>
     </div>
   </div>
 
   <section id='review-section'>
-
-    <h2>리뷰</h2>
-
     <form id='review-form'>
-      <label>이름:</label>
-      <input type='text' id='reviewer-name'><br />
-      <label>내용:</label>
-      <textarea id='review-content' rows="5" cols="50"></textarea><br />
+      <div class="comment_block">
+        <div class="comment_head">
+            <input type="text" class="comment_name" placeholder="닉네임">
+            <input type="password" class="comment_password" placeholder="암호">
+        </div>
+        <div class="comment_body">
+          <div class="comment_content">
+              <textarea type="text" class="comment_text" placeholder="리뷰 한줄평을 입력하세요"></textarea>
+          </div>
+      </div>
+ 
       <label>점수:</label>
       <select id='score-select'>
         <option value='5'>5점</option>
@@ -47,6 +51,7 @@
         <option value='1'>1점</option>
       </select><br />
       <input type=submit value=Submit>
+    </div>
     </form>
 
     <ul id='reviews-list'></ul>
