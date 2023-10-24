@@ -1,6 +1,10 @@
 const reviewForm = document.getElementById("review-form");
 const reviews = document.getElementById("reviews-list");
 
+let nextId = localStorage.getItem("nextId")
+  ? parseInt(localStorage.getItem("nextId"))
+  : 1;
+
 // Load reviews from local storage when the page loads
 const storedReviews = JSON.parse(
   localStorage.getItem("reviews") || "[]"
@@ -30,6 +34,7 @@ reviewForm.addEventListener("submit", function (e) {
   const movieId = urlParams.get("id");
 
   const reviewData = {
+    id: nextId++,
     movieId: movieId,
     name: name,
     reviewText: reviewText,
