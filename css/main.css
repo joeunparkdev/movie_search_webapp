@@ -6,3 +6,16 @@ body {
     font-size: 36px;
     font-weight: bold;
 }
+
+.no_results {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: red;
+    font-size: 24px;
+    height: 100%;
+    text-align: center;
+    margin-top: 50px;
+  }
+  
