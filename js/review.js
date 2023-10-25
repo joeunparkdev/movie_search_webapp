@@ -1,14 +1,15 @@
 const reviewForm = document.getElementById("review-form");
 const reviews = document.getElementById("reviews-list");
 
-let nextId = localStorage.getItem("nextId")
-  ? parseInt(localStorage.getItem("nextId"))
-  : 1;
-
 // Load reviews from local storage when the page loads
 const storedReviews = JSON.parse(
   localStorage.getItem("reviews") || "[]"
 );
+
+let nextId =
+  storedReviews.length > 0
+    ? Math.max(...storedReviews.map((review) => review.id)) + 1
+    : 1;
 
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get("id");
@@ -22,7 +23,26 @@ for (const review of filteredReviews) {
   displayReview(review);
 }
 
-reviewForm.addEventListener("submit", function (e) {
+async function hashPassword(password) {
+  try {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+
+    return hashHex;
+  } catch (error) {
+    console.error("Error hashing password:", error);
+    return null;
+  }
+}
+
+reviewForm.addEventListener("submit", async function (e) {
   e.preventDefault();
 
   const name = document.getElementById("name").value;
@@ -33,17 +53,15 @@ reviewForm.addEventListener("submit", function (e) {
     reviewForm.reset();
     return;
   }
-
-  // Get the current movie ID from the URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const movieId = urlParams.get("id");
+  // Hash the user's password before storing it
+  const hashedPassword = await hashPassword(password);
 
   const reviewData = {
     id: nextId++,
     movieId: movieId,
     name: name,
     reviewText: reviewText,
-    password: password,
+    password: hashedPassword,
   };
 
   // Add the review to the reviews list and save it to local storage
@@ -68,14 +86,14 @@ function displayReview(reviewData) {
 
   const deleteButton = reviewElement.querySelector(".delete-button");
 
-  deleteButton.addEventListener("click", () => {
+  deleteButton.addEventListener("click", async () => {
     const enteredPassword = prompt("비밀번호를 입력하세요.");
-    if (enteredPassword === reviewData.password) {
-      // Check if the review element is still a child of the reviews element
+    const enteredPasswordHash = await hashPassword(enteredPassword);
+
+    if (enteredPasswordHash === reviewData.password) {
       if (reviews.contains(reviewElement)) {
         reviews.removeChild(reviewElement);
       }
-
       removeReviewFromStorage(reviewData.id);
     } else {
       alert("비밀번호가 틀렸습니다.");
@@ -83,9 +101,11 @@ function displayReview(reviewData) {
   });
 
   const editButton = reviewElement.querySelector(".edit-button");
-  editButton.addEventListener("click", () => {
-    const enteredPassword = prompt("비밀번호를 입력하세요");
-    if (enteredPassword === reviewData.password) {
+
+  editButton.addEventListener("click", async () => {
+    const enteredPassword = prompt("비밀번호를 입력하세요.");
+    const enteredPasswordHash = await hashPassword(enteredPassword);
+    if (enteredPasswordHash === reviewData.password) {
       let newReview = prompt("새로운 리뷰 내용을 입력하세요");
       updateStoredReview(newReview, reviewData.id);
 
