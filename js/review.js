@@ -42,24 +42,6 @@ async function hashPassword(password) {
   }
 }
 
-function secureCompare(a, b) {
-  const buffA = Buffer.from(a);
-  const buffB = Buffer.from(b);
-
-  // Ensure both buffers have the same length
-  if (buffA.length !== buffB.length) {
-    return false;
-  }
-
-  // Perform constant-time comparison
-  let result = 0;
-  for (let i = 0; i < buffA.length; i++) {
-    result |= buffA[i] ^ buffB[i];
-  }
-
-  return result === 0;
-}
-
 reviewForm.addEventListener("submit", async function (e) {
   e.preventDefault();
 
@@ -108,7 +90,7 @@ function displayReview(reviewData) {
     const enteredPassword = prompt("비밀번호를 입력하세요.");
     const enteredPasswordHash = await hashPassword(enteredPassword);
 
-    if (secureCompare(enteredPasswordHash, reviewData.password)) {
+    if (enteredPasswordHash === reviewData.password) {
       if (reviews.contains(reviewElement)) {
         reviews.removeChild(reviewElement);
       }
@@ -123,7 +105,7 @@ function displayReview(reviewData) {
   editButton.addEventListener("click", async () => {
     const enteredPassword = prompt("비밀번호를 입력하세요.");
     const enteredPasswordHash = await hashPassword(enteredPassword);
-    if (secureCompare(enteredPasswordHash, reviewData.password)) {
+    if (enteredPasswordHash === reviewData.password) {
       let newReview = prompt("새로운 리뷰 내용을 입력하세요");
       updateStoredReview(newReview, reviewData.id);
 
