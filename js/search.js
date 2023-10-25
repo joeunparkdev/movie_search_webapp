@@ -130,7 +130,7 @@ document.querySelector(".vote_average").addEventListener("click", async function
 //최신순 정렬
 document.querySelector(".release_date").addEventListener("click", async function releaseDate() {
     searchMovies.sort((a, b) => {
-        return b.release_date - a.release_date;
+        return new Date(b.release_date) - new Date(a.release_date);
     });
 
     deleteSearchCard();
