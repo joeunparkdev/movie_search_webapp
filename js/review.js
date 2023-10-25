@@ -30,6 +30,11 @@ reviewForm.addEventListener("submit", function (e) {
   const reviewText = document.getElementById("review").value;
   const password = document.getElementById("password").value;
 
+  if (!commentValidationCheck(reviewText)) {
+    reviewForm.reset();
+    return;
+  }
+
   // Get the current movie ID from the URL
   const urlParams = new URLSearchParams(window.location.search);
   const movieId = urlParams.get("id");

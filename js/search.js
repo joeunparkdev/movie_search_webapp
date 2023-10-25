@@ -80,7 +80,14 @@ function updateCardContent() {
 }
 
 document.querySelector(".search_button").addEventListener("click", async (e) => {
-    const title = document.querySelector(".search_box input").value;
+    const searchBox = document.querySelector(".search_box input");
+    const title = searchBox.value;
+    // 유효성 검사
+    if (!searchValidationCheck(title)) {
+        searchBox.value = "";
+        return;
+    }
+
     const searchMovies = await getMovies(title);
     
     document.querySelector(".search_text").style.display = "block";
@@ -91,6 +98,7 @@ document.querySelector(".search_button").addEventListener("click", async (e) => 
     searchMovies.forEach((movie) => {
         createSearchCard(movie);
     });
+    searchBox.value = "";
 });
 
 //조회수 정렬
