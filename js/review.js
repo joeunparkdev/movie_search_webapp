@@ -23,6 +23,41 @@ for (const review of filteredReviews) {
   displayReview(review);
 }
 
+async function hashPassword(password) {
+  try {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+
+      return hashHex;
+  } catch (error) {
+      console.error('Error hashing password:', error);
+      return null;
+  }
+}
+
+function secureCompare(a, b) {
+  const buffA = Buffer.from(a);
+  const buffB = Buffer.from(b);
+
+  // Ensure both buffers have the same length
+  if (buffA.length !== buffB.length) {
+    return false;
+  }
+
+  // Perform constant-time comparison
+  let result = 0;
+  for (let i = 0; i < buffA.length; i++) {
+    result |= buffA[i] ^ buffB[i];
+  }
+
+  return result === 0;
+}
+
 reviewForm.addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -34,6 +69,8 @@ reviewForm.addEventListener("submit", function (e) {
     reviewForm.reset();
     return;
   }
+  // Hash the user's password before storing it
+  const hashedPassword = await hashPassword(password);
 
   // Get the current movie ID from the URL
   const urlParams = new URLSearchParams(window.location.search);
@@ -44,7 +81,7 @@ reviewForm.addEventListener("submit", function (e) {
     movieId: movieId,
     name: name,
     reviewText: reviewText,
-    password: password,
+    password: hashedPassword,
   };
 
   // Add the review to the reviews list and save it to local storage
@@ -55,6 +92,7 @@ reviewForm.addEventListener("submit", function (e) {
 
   reviewForm.reset();
 });
+
 
 function displayReview(reviewData) {
   const reviewElement = document.createElement("div");
@@ -71,22 +109,23 @@ function displayReview(reviewData) {
 
   deleteButton.addEventListener("click", () => {
     const enteredPassword = prompt("비밀번호를 입력하세요.");
-    if (enteredPassword === reviewData.password) {
-      // Check if the review element is still a child of the reviews element
+    const enteredPasswordHash = await hashPassword(enteredPassword);
+
+    if (secureCompare(enteredPasswordHash, reviewData.password)) {
       if (reviews.contains(reviewElement)) {
         reviews.removeChild(reviewElement);
       }
-
       removeReviewFromStorage(reviewData.id);
     } else {
-      alert("비밀번호가 틀렸습니다.");
+        alert("비밀번호가 틀렸습니다.");
     }
   });
 
   const editButton = reviewElement.querySelector(".edit-button");
   editButton.addEventListener("click", () => {
-    const enteredPassword = prompt("비밀번호를 입력하세요");
-    if (enteredPassword === reviewData.password) {
+    const enteredPassword = prompt("비밀번호를 입력하세요.");
+    const enteredPasswordHash = await hashPassword(enteredPassword);
+    if (secureCompare(enteredPasswordHash, reviewData.password)) {
       let newReview = prompt("새로운 리뷰 내용을 입력하세요");
       updateStoredReview(newReview, reviewData.id);
 
