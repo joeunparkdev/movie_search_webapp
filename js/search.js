@@ -88,7 +88,7 @@ document.querySelector(".search_button").addEventListener("click", async (e) => 
         return;
     }
 
-    const searchMovies = await getMovies(title);
+    searchMovies = await getMovies(title);
     
     document.querySelector(".search_text").style.display = "block";
     document.querySelector(".search_keyword").textContent = `"${title}"`;
@@ -103,8 +103,6 @@ document.querySelector(".search_button").addEventListener("click", async (e) => 
 
 //조회수 정렬
 document.querySelector(".vote_count").addEventListener("click", async function voteCount() {
-    const title = document.querySelector(".search_box input").value;
-    const searchMovies = await getMovies(title);
     searchMovies.sort((a, b) => {
         return b.vote_count - a.vote_count;
     });
@@ -118,8 +116,6 @@ document.querySelector(".vote_count").addEventListener("click", async function v
 
 //별점순 정렬
 document.querySelector(".vote_average").addEventListener("click", async function voteAverage() {
-    const title = document.querySelector(".search_box input").value;
-    const searchMovies = await getMovies(title);
     searchMovies.sort((a, b) => {
         return b.vote_average - a.vote_average;
     });
@@ -133,10 +129,8 @@ document.querySelector(".vote_average").addEventListener("click", async function
 
 //최신순 정렬
 document.querySelector(".release_date").addEventListener("click", async function releaseDate() {
-    const title = document.querySelector(".search_box input").value;
-    const searchMovies = await getMovies(title);
     searchMovies.sort((a, b) => {
-        return b.release_date - a.release_date;
+        return new Date(b.release_date) - new Date(a.release_date);
     });
 
     deleteSearchCard();
