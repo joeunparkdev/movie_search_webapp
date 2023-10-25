@@ -4,7 +4,7 @@ window.onload = async function () {
 
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`
+      `https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR&api_key=${API_KEY}`
     );
     if (!response.ok) {
       throw new Error("HTTP error " + response.status);

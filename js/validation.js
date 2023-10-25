@@ -1,4 +1,10 @@
 function searchValidationCheck(value) {
+
+    if (!value) {
+        alert("검색어를 입력해야 합니다..");
+        return false;
+    }
+
     // 욕설 필터링
     for (let abuse of abuses) {
         if (value.includes(abuse)) {
@@ -11,6 +17,11 @@ function searchValidationCheck(value) {
 }
 
 function commentValidationCheck(value) {
+    if (!value) {
+        alert("리뷰 내용을 입력해야 합니다..");
+        return false;
+    }
+
     // 글자수 필터링
     const textLength = value.length;
     if (textLength < 5 || textLength > 50) {

@@ -185,7 +185,6 @@ async function handleEditClick(reviewData, reviewElement) {
 
     // 유효성 검사
     if (!commentValidationCheck(newReviewText)) {
-      alert("유효하지 않은 리뷰입니다.");
       return;
     }
 
