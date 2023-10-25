@@ -16,6 +16,14 @@ window.onload = function () {
       movieData.description;
     document.querySelector(".detail_average").innerText =
       "평점 " + movieData.average;
+    document.querySelector(".detail_originalLanguage").textContent =
+      movieData.original_language;
+    document.querySelector(".detail_popularity").innerText =
+      movieData.popularity;
+    document.querySelector(".detail_releaseDate").innerText =
+      movieData.release_date;
+
+      
   } else {
     alert("영화 정보를 불러올 수 없습니다.");
   }

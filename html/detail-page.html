@@ -11,8 +11,7 @@
 </head>
 
 <body>
-  <header
-    class="p-1 d-flex flex-wrap align-items-center justify-content-md-between border-bottom border-danger">
+  <header class="p-1 d-flex flex-wrap align-items-center justify-content-md-between border-bottom border-danger">
     <div class="ms-5 col-md-3">
       <a href="main.html" class="text-decoration-none title text-danger">
         <p class="fs-30"></p>Flex Movie</p>
@@ -35,8 +34,13 @@
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title detail_title">Card title</h5>
-            <p class="card-text detail_description">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p clss="card-text detail_releaseDate">개봉일</p>
+            <p clss="card-text detail_originalLanguage">원어</p>
+            <p clss="card-text detail_popularity">영화인기정도</p>
             <p class="card-text detail_average"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+            <p class="card-text detail_description_title"> 줄거리</p>
+            <p class="card-text detail_description">This is a wider card with supporting text below as a natural
+              lead-in to additional content. This content is a little bit longer.</p>
           </div>
         </div>
       </div>
@@ -47,14 +51,15 @@
     <form id='review-form'>
       <div class="comment_block">
         <div class="comment_head">
-            <div class="comment_head_input">
-              <input type="text" id="name" class="comment_name border border-danger" placeholder="닉네임">
-              <input type="password" id= "password" class="comment_password border border-danger" placeholder="암호">
-            </div>
+          <div class="comment_head_input">
+            <input type="text" id="name" class="comment_name border border-danger" placeholder="닉네임">
+            <input type="password" id="password" class="comment_password border border-danger" placeholder="암호">
+          </div>
         </div>
         <div class="comment_body">
           <div class="comment_content">
-              <textarea type="text" class="comment_text border border-danger" id="review" placeholder="리뷰 한줄평을 입력하세요"></textarea>
+            <textarea type="text" class="comment_text border border-danger" id="review"
+              placeholder="리뷰 한줄평을 입력하세요"></textarea>
           </div>
         </div>
         <div class="comment_head">
@@ -71,9 +76,9 @@
           <div>
             <input class="comment_submit btn btn-outline-danger" type=submit value=Submit>
           </div>
+        </div>
+
       </div>
-     
-    </div>
     </form>
   </section>
 
@@ -81,13 +86,12 @@
     <h1 class="review-list-title text-danger">리뷰 목록</h1>
     <ul class="reviews-list" id='reviews-list'></ul>
   </section>
-  
-  
+
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-    crossorigin="anonymous">
-  </script>
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
+    </script>
   <script src='../js//abuses.js'></script>
   <script src='../js//validation.js'></script>
   <script src='../js//detail-page.js'></script>

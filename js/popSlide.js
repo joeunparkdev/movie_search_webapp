@@ -35,6 +35,9 @@ function updatePopCardContent() {
         card.querySelector(".movie_title").textContent = movie.title;
         card.querySelector(".movie_overview").textContent = movie.overview;
         card.querySelector(".movie_average").textContent = movie.vote_average;
+        card.querySelector(".movie_popularity").textContent = movie.popularity;
+        card.querySelector(".movie_releaseDate").textContent = movie.release_date;
+        card.querySelector(".movie_originalLanguage").textContent = movie.original_language;
     });
 }
 

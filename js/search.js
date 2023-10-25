@@ -13,6 +13,7 @@ async function getMovies(title) {
             },
         });
         const searchMovies = response.data.results;
+        console.log(searchMovies);
         return searchMovies;
     } catch (e) {
         console.log("api 요청 에러");
@@ -55,6 +56,21 @@ function createSearchCard(movie) {
     average.classList.add("movie_average");
     average.textContent = movie.vote_average;
     card.appendChild(average);
+
+    const popularity = document.createElement("span");
+    popularity.classList.add("movie_popularity");
+    popularity.textContent = movie.popularity;
+    card.appendChild(popularity);
+
+    const releaseDate = document.createElement("span");
+    releaseDate.classList.add("movie_releaseDate");
+    releaseDate.textContent = movie.release_date;
+    card.appendChild(releaseDate);
+
+    const originalLanguage = document.createElement("span");
+    originalLanguage.classList.add("movie_originalLanguage");
+    originalLanguage.textContent = movie.original_language;
+    card.appendChild(originalLanguage);
 
     initEventCard(card);
 
