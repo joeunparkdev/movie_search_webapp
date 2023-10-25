@@ -11,14 +11,13 @@
   <link href="../css/search.css" rel="stylesheet">
   <link href="../css/slidebar.css" rel="stylesheet">
   <link href="../css/card.css" rel="stylesheet">
-  <link href="../css/detail.css" rel="stylesheet">
 </head>
 
 <body>
   <header
-    class="p-1 d-flex flex-wrap align-items-center justify-content-md-between border-bottom">
+    class="p-1 d-flex flex-wrap align-items-center justify-content-md-between border-bottom border-danger">
     <div class="ms-5 col-md-3">
-      <a href="#" class="text-decoration-none title text-danger">
+      <a href="main.html" class="text-decoration-none title text-danger">
         <p class="fs-30"></p>Flex Movie</p>
       </a>
     </div>
@@ -36,7 +35,10 @@
       <button type="button" class="search_button btn btn-danger">검색</button>
     </div>
 
-    <p class="search_text"><span class="search_keyword text-danger"></span>의 검색 결과</p>
+    <p class="search_text"><span class="search_keyword text-danger"></span>의 검색 결과 
+      <button type="button" class="vote_average btn btn-danger">별점순</button></span> 
+      <span><button type="button" class="release_date btn btn-danger">최신순</button></span>
+      <span><button type="button" class="vote_count btn btn-danger">조회순</button></span></p>
 
     <div class="album py-5 bg-body-tertiary">
       <div class="container">
@@ -45,7 +47,6 @@
       </div>
   </div>
   </main>
-
 
   <section class="pop">
     <span class="slide_title text-danger">인기 영화</span>
@@ -97,7 +98,7 @@
           </div>
         </div>
       </div>
-      <button type="button" class="prev btn btn-outline-danger"></button>
+      <button type="button" class="prev btn btn-outline-danger"><</button>
       <button type="button" class="next btn btn-outline-danger">></button>
     </div>
   </section>
@@ -152,29 +153,13 @@
           </div>
         </div>
       </div>
-      <button type="button" class="prev btn btn-outline-danger"></button>
+      <button type="button" class="prev btn btn-outline-danger"><</button>
       <button type="button" class="next btn btn-outline-danger">></button>
     </div>
   </section>
 
   <div class="hide_block">
-    <div class="card mb-3 detail_card" style="max-inline-size: 540px;">
-      <div class="detail_delete">
-        X
-      </div>
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img src="..." class="img-fluid rounded-start detail_img" alt="...">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title detail_title">Card title</h5>
-            <p class="card-text detail_description">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p class="card-text detail_average"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </div>
   
 
@@ -190,7 +175,8 @@
   </script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="../js/secret.js"></script>
-  <script src="../js/detail.js"></script>
+  <script src="../js/abuses.js"></script>
+  <script src="../js/validation.js"></script>
   <script src="../js/search.js"></script>
   <script src="../js/playSlide.js"></script>
   <script src="../js/popSlide.js"></script>

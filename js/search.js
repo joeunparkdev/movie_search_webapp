@@ -3,6 +3,7 @@ const popularURL = "https://api.themoviedb.org/3/movie/popular?language=ko-KR&pa
 const posterURL = "https://www.themoviedb.org/t/p/w1280";
 const playURL = "https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=";
 
+let searchMovies;
 
 async function getMovies(title) {
     const response = await axios.get(searchURL + title, {
@@ -11,9 +12,10 @@ async function getMovies(title) {
         },
     });
     const searchMovies = response.data.results;
-
+    console.log(searchMovies);
     return searchMovies;
 }
+
 
 function createSearchCard(movie) {
     const searchList = document.querySelector(".search_list");
@@ -57,7 +59,8 @@ function createSearchCard(movie) {
 }
 
 function deleteSearchCard() {
-    document.querySelectorAll(".search_list .col").forEach((col) => {
+    let list = document.querySelectorAll(".search_list .col");
+    list.forEach((col) => {
         col.remove();
     });
 }
@@ -68,7 +71,7 @@ function updateCardContent() {
     console.log(currentPopShow);
     cards.map((card, idx) => {
         const movie = popularMovies[currentPopShow + idx];
-        
+
         card.querySelector("img").src = posterURL + movie.poster_path;
         card.querySelector(".movie_title").textContent = movie.title;
         card.querySelector(".movie_overview").textContent = movie.overview;
@@ -77,10 +80,64 @@ function updateCardContent() {
 }
 
 document.querySelector(".search_button").addEventListener("click", async (e) => {
-    const title = document.querySelector(".search_box input").value;
+    const searchBox = document.querySelector(".search_box input");
+    const title = searchBox.value;
+    // 유효성 검사
+    if (!searchValidationCheck(title)) {
+        searchBox.value = "";
+        return;
+    }
+
     const searchMovies = await getMovies(title);
+    
     document.querySelector(".search_text").style.display = "block";
     document.querySelector(".search_keyword").textContent = `"${title}"`;
+
+    deleteSearchCard();
+
+    searchMovies.forEach((movie) => {
+        createSearchCard(movie);
+    });
+    searchBox.value = "";
+});
+
+//조회수 정렬
+document.querySelector(".vote_count").addEventListener("click", async function voteCount() {
+    const title = document.querySelector(".search_box input").value;
+    const searchMovies = await getMovies(title);
+    searchMovies.sort((a, b) => {
+        return b.vote_count - a.vote_count;
+    });
+
+    deleteSearchCard();
+
+    searchMovies.forEach((movie) => {
+        createSearchCard(movie);
+    });
+});
+
+//별점순 정렬
+document.querySelector(".vote_average").addEventListener("click", async function voteAverage() {
+    const title = document.querySelector(".search_box input").value;
+    const searchMovies = await getMovies(title);
+    searchMovies.sort((a, b) => {
+        return b.vote_average - a.vote_average;
+    });
+
+    deleteSearchCard();
+
+    searchMovies.forEach((movie) => {
+        createSearchCard(movie);
+    });
+});
+
+//최신순 정렬
+document.querySelector(".release_date").addEventListener("click", async function releaseDate() {
+    const title = document.querySelector(".search_box input").value;
+    const searchMovies = await getMovies(title);
+    searchMovies.sort((a, b) => {
+        return b.release_date - a.release_date;
+    });
 
     deleteSearchCard();
 
