@@ -100,7 +100,7 @@ document.querySelector(".search_button").addEventListener("click", async (e) => 
     }
 
     searchMovies = await getMovies(title);
-    
+
     document.querySelector(".search_line").style.display = "flex";
     document.querySelector(".search_keyword").textContent = `"${title}"`;
 
@@ -139,54 +139,62 @@ function showSortButtons() {
 }
 
 //조회수 정렬
-    document.querySelector(".vote_count").addEventListener("click", async function voteCount() {
-        // 오직 조회순만 active하게 만들기
-        if (!document.querySelector(".vote_count").classList.contains("active")) {
+document.querySelector(".vote_count").addEventListener("click", async function voteCount() {
+    // 오직 조회순만 active하게 만들기
+    if (!document.querySelector(".vote_count").classList.contains("active")) {
         document.querySelector(".vote_count").classList.add("active");
         document.querySelector(".vote_average").classList.remove("active");
-        document.querySelector(".release_date").classList.remove("active"); 
+        document.querySelector(".release_date").classList.remove("active");
 
         deleteSearchCard();
 
-    searchMovies.sort((a, b) => {
-        return b.vote_count - a.vote_count;
-    });
+        searchMovies.sort((a, b) => {
+            return b.vote_count - a.vote_count;
+        });
 
-    searchMovies.forEach((movie) => {
-        createSearchCard(movie);
-    });
-}
+        searchMovies.forEach((movie) => {
+            createSearchCard(movie);
+        });
+    }
 });
 
 //별점순 정렬
 document.querySelector(".vote_average").addEventListener("click", async function voteAverage() {
     // 오직 별점순만 active하게 만들기
     if (!document.querySelector(".vote_average").classList.contains("active")) {
-    document.querySelector(".vote_average").classList.add("active");
-    document.querySelector(".vote_count").classList.remove("active");
-    document.querySelector(".release_date").classList.remove("active");
+        document.querySelector(".vote_average").classList.add("active");
+        document.querySelector(".vote_count").classList.remove("active");
+        document.querySelector(".release_date").classList.remove("active");
 
-    deleteSearchCard();
+        deleteSearchCard();
 
-    searchMovies.forEach((movie) => {
-        createSearchCard(movie);
-    });
-}
+        searchMovies.sort((a, b) => {
+            return b.vote_average - a.vote_average;
+        });
+
+        searchMovies.forEach((movie) => {
+            createSearchCard(movie);
+        });
+    }
 });
 
 //최신순 정렬
 document.querySelector(".release_date").addEventListener("click", async function releaseDate() {
     // 오직 최신순만 active하게 만들기
     if (!document.querySelector(".release_date").classList.contains("active")) {
-    document.querySelector(".release_date").classList.add("active");
-    document.querySelector(".vote_count").classList.remove("active");
-    document.querySelector(".vote_average").classList.remove("active");
+        document.querySelector(".release_date").classList.add("active");
+        document.querySelector(".vote_count").classList.remove("active");
+        document.querySelector(".vote_average").classList.remove("active");
 
-    deleteSearchCard();
+        deleteSearchCard();
 
-    searchMovies.forEach((movie) => {
-        createSearchCard(movie);
-    });
-}
+        searchMovies.sort((a, b) => {
+            return new Date(b.release_date) - new Date(a.release_date);
+        });
+
+        searchMovies.forEach((movie) => {
+            createSearchCard(movie);
+        });
+    }
 });
 
