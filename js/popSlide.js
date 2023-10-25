@@ -7,13 +7,18 @@ async function getPopularMovie(n) {
     
     const page = Math.floor(n / 20) + 1;
     for (let i=1; i<page+1; i++) {
-        const response = await axios.get(popularURL + i, {
-            headers: {
-                Authorization: `Bearer ${ACCESS_TOKEN}`,
-            },
-        });
-        const pageMovies = response.data.results;
-        movies.push(...pageMovies);
+        try {
+            const response = await axios.get(popularURL + i, {
+                headers: {
+                    Authorization: `Bearer ${ACCESS_TOKEN}`,
+                },
+            });
+            const pageMovies = response.data.results;
+            movies.push(...pageMovies);
+        } catch (e) {
+            console.log("api 요청 에러");
+            return;
+        }
     }
     
     return movies.slice(0, n);
@@ -22,7 +27,6 @@ async function getPopularMovie(n) {
 function updatePopCardContent() {
     const cards = document.querySelectorAll(".pop_card");
 
-    console.log(currentPopShow);
     cards.forEach((card, idx) => {
         const movie = popularMovies[currentPopShow + idx];
 

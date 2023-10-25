@@ -30,12 +30,15 @@ input:focus {
     font-size: 16px;
 }
 
-.search_text {
+.search_line {
+    width: 90%;
+
+    margin: 0 auto;
     margin-top: 20px;
-    margin-left: 5%;
     margin-bottom: 0;
 
     display: none;
+    justify-content: space-between;
     font-size: 24px;
     font-weight: bold;
 }

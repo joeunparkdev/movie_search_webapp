@@ -1,19 +1,23 @@
-
 let playMovies = [];
 let currentPlayShow = 0;
 
 async function getPlayMovie(n) {
     const movies = [];
     
-    const page = Math.floor(n / 20) + 1;
-    for (let i=1; i<page+1; i++) {
-        const response = await axios.get(playURL + i, {
-            headers: {
-                Authorization: `Bearer ${ACCESS_TOKEN}`,
-            },
-        });
-        const pageMovies = response.data.results;
-        movies.push(...pageMovies);
+    try {
+        const page = Math.floor(n / 20) + 1;
+        for (let i=1; i<page+1; i++) {
+            const response = await axios.get(playURL + i, {
+                headers: {
+                    Authorization: `Bearer ${ACCESS_TOKEN}`,
+                },
+            });
+            const pageMovies = response.data.results;
+            movies.push(...pageMovies);
+        }
+    } catch (e) {
+        console.log("api 요청 에러");
+        return;
     }
     
     return movies.slice(0, n);
@@ -22,7 +26,6 @@ async function getPlayMovie(n) {
 function updatePlayCardContent() {
     const cards = document.querySelectorAll(".play_card");
 
-    console.log(currentPlayShow);
     cards.forEach((card, idx) => {
         const movie = playMovies[currentPlayShow + idx];
 

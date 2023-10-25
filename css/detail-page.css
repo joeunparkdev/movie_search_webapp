@@ -19,37 +19,7 @@
   width: 80%;
 }
 
-#review-section {
-  inline-size: 100%;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-#review-form,
-#reviews-list {
-  inline-size: 50%;
-}
-
-.delete-button {
-  background-color: #ff5555;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-.delete-button:hover {
-  background-color: #ff0000;
-}
-
-.edit-button {
-  background-color: #ff5555;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-.edit-button:hover {
-  background-color: #ff0000;
+.detail_title {
+  font-size: 28px;
+  font-weight: bold;
 }
