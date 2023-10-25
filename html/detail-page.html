@@ -48,21 +48,20 @@
         <div class="comment_head">
             <input type="text" id="name" class="comment_name" placeholder="닉네임">
             <input type="password" id= "password" class="comment_password" placeholder="암호">
+            <label>점수:</label>
+            <select id='score-select'>
+              <option value='5'>5점</option>
+              <option value='4'>4점</option>
+              <option value='3'>3점</option>
+              <option value='2'>2점</option>
+              <option value='1'>1점</option>
+            </select><br />
         </div>
         <div class="comment_body">
           <div class="comment_content">
               <textarea type="text" class="comment_text" id="review" placeholder="리뷰 한줄평을 입력하세요"></textarea>
           </div>
       </div>
- 
-      <label>점수:</label>
-      <select id='score-select'>
-        <option value='5'>5점</option>
-        <option value='4'>4점</option>
-        <option value='3'>3점</option>
-        <option value='2'>2점</option>
-        <option value='1'>1점</option>
-      </select><br />
       <input type=submit value=Submit>
     </div>
     </form>
@@ -74,6 +73,8 @@
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
     crossorigin="anonymous">
   </script>
+  <script src='../js//abuses.js'></script>
+  <script src='../js//validation.js'></script>
   <script src='../js//detail-page.js'></script>
   <script src='../js//review.js'></script>
 </body>
