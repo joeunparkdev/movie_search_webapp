@@ -1,7 +1,6 @@
 const reviewForm = document.getElementById("review-form");
 const reviews = document.getElementById("reviews-list");
 
-// Load reviews from local storage when the page loads
 let storedReviews = loadReviewsFromLocalStorage();
 
 const movieId = getMovieIdFromUrl();
@@ -24,7 +23,6 @@ async function handleReviewSubmission(e) {
     return;
   }
 
-  // Hash the user's password before storing it
   const hashedPassword = await hashPassword(passwordInputValue);
 
   nextId++;
@@ -40,8 +38,6 @@ async function handleReviewSubmission(e) {
   addNewReview(newReviewData);
   resetForm(reviewForm);
 }
-
-// 함수 정의
 
 // 로컬 스토리지 가져오기
 function loadReviewsFromLocalStorage() {
