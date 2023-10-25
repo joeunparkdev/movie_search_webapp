@@ -100,8 +100,8 @@ function displayReview(reviewData) {
   const reviewElement = document.createElement("div");
   reviewElement.classList.add("user-review");
   reviewElement.innerHTML = `
-    <strong>작성자:</strong> ${reviewData.name}<br>
-    <strong>리뷰:</strong> <span class="review-text">${reviewData.reviewText}</span><br>
+    <strong class="writer">${reviewData.name}</strong><br>
+    <span class="review-text">${reviewData.reviewText}</span><br>
     <button class="delete-button">Delete</button>
     <button class="edit-button">Edit</button>
   `;

@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+ul, li {
+    list-style: none;
+}
+
+.review-section {
+    width: 100%;
+}
+
+.comment_block {
+    width: 80%;
+
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.comment_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.comment_head_input {
+    width: 35%;
+}
+
+.comment_name, .comment_password {
+    width: 40%;
+
+    border-radius: 6px;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+}
+
+.comment_body {
+    width: 100%;
+}
+
+.comment_text {
+    width: 100%;
+    height: auto;
+    min-height: 60px;
+    margin-top: 10px;
+
+    border-radius: 6px;
+
+    resize: none;
+}
+
+.comment_submit {
+    margin-top: 10px;
+    float: right;
+}
+
+.review-list-section {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.review-list-title {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.reviews-list {
+    padding: 3%;
+}
+
+.user-review {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ff5555;
+}
+
+.delete-button {
+    background-color: #ff5555;
+    color: white;
+    border: none;
+    padding: 3px 6px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.delete-button:hover {
+    background-color: #ff0000;
+}
+
+.edit-button {
+    background-color: #ff5555;
+    color: white;
+    border: none;
+    padding: 3px 6px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.edit-button:hover {
+    background-color: #ff0000;
+}
