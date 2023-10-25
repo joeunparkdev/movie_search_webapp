@@ -25,18 +25,20 @@ for (const review of filteredReviews) {
 
 async function hashPassword(password) {
   try {
-      const encoder = new TextEncoder();
-      const data = encoder.encode(password);
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
 
-      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
 
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
 
-      return hashHex;
+    return hashHex;
   } catch (error) {
-      console.error('Error hashing password:', error);
-      return null;
+    console.error("Error hashing password:", error);
+    return null;
   }
 }
 
@@ -58,7 +60,7 @@ function secureCompare(a, b) {
   return result === 0;
 }
 
-reviewForm.addEventListener("submit", function (e) {
+reviewForm.addEventListener("submit", async function (e) {
   e.preventDefault();
 
   const name = document.getElementById("name").value;
@@ -71,10 +73,6 @@ reviewForm.addEventListener("submit", function (e) {
   }
   // Hash the user's password before storing it
   const hashedPassword = await hashPassword(password);
-
-  // Get the current movie ID from the URL
-  const urlParams = new URLSearchParams(window.location.search);
-  const movieId = urlParams.get("id");
 
   const reviewData = {
     id: nextId++,
@@ -93,7 +91,6 @@ reviewForm.addEventListener("submit", function (e) {
   reviewForm.reset();
 });
 
-
 function displayReview(reviewData) {
   const reviewElement = document.createElement("div");
   reviewElement.classList.add("user-review");
@@ -107,7 +104,7 @@ function displayReview(reviewData) {
 
   const deleteButton = reviewElement.querySelector(".delete-button");
 
-  deleteButton.addEventListener("click", () => {
+  deleteButton.addEventListener("click", async () => {
     const enteredPassword = prompt("비밀번호를 입력하세요.");
     const enteredPasswordHash = await hashPassword(enteredPassword);
 
@@ -117,12 +114,13 @@ function displayReview(reviewData) {
       }
       removeReviewFromStorage(reviewData.id);
     } else {
-        alert("비밀번호가 틀렸습니다.");
+      alert("비밀번호가 틀렸습니다.");
     }
   });
 
   const editButton = reviewElement.querySelector(".edit-button");
-  editButton.addEventListener("click", () => {
+
+  editButton.addEventListener("click", async () => {
     const enteredPassword = prompt("비밀번호를 입력하세요.");
     const enteredPasswordHash = await hashPassword(enteredPassword);
     if (secureCompare(enteredPasswordHash, reviewData.password)) {
