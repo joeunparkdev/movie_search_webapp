@@ -6,14 +6,18 @@ const playURL = "https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&p
 let searchMovies;
 
 async function getMovies(title) {
-    const response = await axios.get(searchURL + title, {
-        headers: {
-            Authorization: `Bearer ${ACCESS_TOKEN}`,
-        },
-    });
-    const searchMovies = response.data.results;
-    console.log(searchMovies);
-    return searchMovies;
+    try {
+        const response = await axios.get(searchURL + title, {
+            headers: {
+                Authorization: `Bearer ${ACCESS_TOKEN}`,
+            },
+        });
+        const searchMovies = response.data.results;
+        return searchMovies;
+    } catch (e) {
+        console.log("api 요청 에러");
+        return;
+    }
 }
 
 
@@ -23,7 +27,7 @@ function createSearchCard(movie) {
     col.classList.add("col");
 
     const card = document.createElement("div");
-    card.classList.add("card", "card_", "pop_card");
+    card.classList.add("card", "card_");
     card.dataset.id = movie.id;
 
     const img = document.createElement("img");
@@ -65,20 +69,6 @@ function deleteSearchCard() {
     });
 }
 
-function updateCardContent() {
-    const cards = document.querySelectorAll(".pop_card");
-
-    console.log(currentPopShow);
-    cards.map((card, idx) => {
-        const movie = popularMovies[currentPopShow + idx];
-
-        card.querySelector("img").src = posterURL + movie.poster_path;
-        card.querySelector(".movie_title").textContent = movie.title;
-        card.querySelector(".movie_overview").textContent = movie.overview;
-        card.querySelector(".movie_average").textContent = movie.vote_average;
-    });
-}
-
 document.querySelector(".search_button").addEventListener("click", async (e) => {
     const searchBox = document.querySelector(".search_box input");
     const title = searchBox.value;
@@ -90,7 +80,7 @@ document.querySelector(".search_button").addEventListener("click", async (e) => 
 
     searchMovies = await getMovies(title);
     
-    document.querySelector(".search_text").style.display = "block";
+    document.querySelector(".search_line").style.display = "flex";
     document.querySelector(".search_keyword").textContent = `"${title}"`;
 
     deleteSearchCard();
