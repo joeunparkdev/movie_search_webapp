@@ -1,14 +1,3 @@
-const abuseURL = "https://blog.kakaocdn.net/dn/o8jTC/btrerzoVaaI/OiKT6hhdON0BCnVFY3kYQK/fword_list.txt?attach=1&knm=tfile.txt";
-
-let abuses;
-
-async function loadAbuse() {
-    const response = await fetch(abuseURL);
-    const responseText = await response.text();
-
-    abuses = responseText.split("\n");
-}
-
 function searchValidationCheck(value) {
     // 욕설 필터링
     for (let abuse of abuses) {
@@ -17,6 +6,8 @@ function searchValidationCheck(value) {
             return false;
         }
     }
+
+    return true;
 }
 
 function commentValidationCheck(value) {
@@ -34,6 +25,6 @@ function commentValidationCheck(value) {
             return false;
         }
     }
-}
 
-loadAbuse();
+    return true;
+}
