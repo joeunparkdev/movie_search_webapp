@@ -1,5 +1,6 @@
 const reviewForm = document.getElementById("review-form");
 const reviews = document.getElementById("reviews-list");
+const scoreInputValue = getInputValue("score-select");
 
 let storedReviews = loadReviewsFromLocalStorage();
 
@@ -33,6 +34,7 @@ async function handleReviewSubmission(e) {
     name: nameInputValue,
     reviewText: reviewInputValue,
     password: hashedPassword,
+    score: scoreInputValue,
   };
 
   addNewReview(newReviewData);
@@ -102,6 +104,7 @@ function displayReview(reviewData) {
   reviewElement.innerHTML = `
     <strong class="writer">${reviewData.name}</strong><br>
     <span class="review-text">${reviewData.reviewText}</span><br>
+    <span class="rating">${reviewData.score}</span><br>
     <button class="delete-button">Delete</button>
     <button class="edit-button">Edit</button>
   `;
@@ -182,7 +185,6 @@ async function handleEditClick(reviewData, reviewElement) {
 
     // 유효성 검사
     if (!commentValidationCheck(newReviewText)) {
-      alert("유효하지 않은 리뷰입니다.");
       return;
     }
 
