@@ -52,43 +52,18 @@ const handleSelection = (title) => {
 };
 
 // 검색 입력시
-$search.onkeyup = async (event) => {
+$search.oninput = async () => {
     const value = $search.value.trim();
     await fetchMovies(autoSearchURL + value);
     const matchDataList = value
         ? dataList.map((movie) => movie.title).filter((title) => title.includes(value))
         : [];
 
-    switch (event.keyCode) {
-        case 1:
-            selectedAutoSuggestion = Math.max(selectedAutoSuggestion - 1, 0);
-            break;
-        case 2:
-            selectedAutoSuggestion = Math.min(selectedAutoSuggestion + 1, matchDataList.length - 1);
-            break;
-        case 3:
-            $search.value = matchDataList[selectedAutoSuggestion] || "";
-            selectedAutoSuggestion = 0;
-            matchDataList.length = 0;
-            $autoComplete.innerHTML = "";
-            break;
-        default:
-            selectedAutoSuggestion = 0;
-            break;
-    }
-
     if (matchDataList.length > 0) {
-        showList(matchDataList, value, selectedAutoSuggestion);
-
-        const autoSuggestedItems = document.querySelectorAll(".autocomplete > div");
-        autoSuggestedItems.forEach((item, index) => {
-            item.addEventListener("click", () => {
-                handleSelection(matchDataList[index]);
-                $autoComplete.innerHTML = ""; // 선택 후 자동완성 숨기기
-            });
-        });
+        showList(matchDataList, value);
+        $autoComplete.style.display = "block";
     } else {
-        $autoComplete.innerHTML = "";
+        $autoComplete.style.display = "none";
     }
 };
 
