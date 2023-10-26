@@ -16,7 +16,7 @@ const fetchMovies = async (url) => {
         if (response.status !== 200) {
             throw new Error(`API 요청이 실패했습니다. 응답 코드: ${response.status}`);
         }
-        
+
         const data = response.data;
 
         if (data.results) {
@@ -60,10 +60,17 @@ $search.oninput = async () => {
         : [];
 
     if (matchDataList.length > 0) {
-        showList(matchDataList, value);
+        showList(matchDataList, value, selectedAutoSuggestion);
         $autoComplete.style.display = "block";
+        const autoSuggestedItems = document.querySelectorAll(".autocomplete > div");
+        autoSuggestedItems.forEach((item, index) => {
+            item.addEventListener("click", () => {
+                handleSelection(matchDataList[index]);
+                $autoComplete.innerHTML = ""; // 선택 후 자동완성 숨기기
+            });
+        });
     } else {
-        $autoComplete.style.display = "none";
+        $autoComplete.innerHTML = "";
     }
 };
 
