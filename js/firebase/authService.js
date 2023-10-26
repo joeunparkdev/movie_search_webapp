@@ -31,6 +31,7 @@ export const googleLogin = async () => {
 
   try {
     const result = await signInWithPopup(auth, provider);
+    location.reload();
     return result.user;
   } catch (error) {
     console.error(error);
@@ -57,4 +58,4 @@ export const checkLoginStatus = async () => {
 // 유저 반환
 export const getUser = () => {
   return auth.currentUser;
-}
+};
