@@ -28,20 +28,26 @@
   </header>
 
   <main>
-    <div class="search_box border border-danger">
-      <input type="text" placeholder="영화 제목을 검색해주세요.">
-      <!-- <i class="fa-solid fa-magnifying-glass" style="color: #fa3545;"></i> -->
-      <button type="button" class="search_button btn btn-danger">검색</button>
+    <div class="search-container">
+      <div class="search_box border border-danger">
+        <input type="text" id="search" autocomplete="off" placeholder="영화 제목을 검색해주세요.">
+        <button type="button" id="search-button" class="search_button btn btn-danger">검색</button>
     </div>
-
-    <div class="search_line">
+    <div class="autocomplete-container">
+        <div class="autocomplete-card">
+            <div class="autocomplete"></div>
+        </div>
+    </div>
+  </div>
+  <div class="search_line">
       <p class="search_text"><span class="search_keyword text-danger"></span>의 검색 결과</p>
       <div class="search_sort_button">
-        <span><button type="button" id = "search_sort_button" class="vote_average_btn btn btn-danger">별점순</button></span>
-        <span><button type="button" id = "release_date_button" class="release_date_btn btn btn-danger">최신순</button></span>
-        <span><button type="button" id = "vote_count_button" class="vote_count_btn btn btn-danger">조회순</button></span>
+          <span><button type="button" id="search_sort_button" class="vote_average_btn btn btn-danger">별점순</button></span>
+          <span><button type="button" id="release_date_button" class="release_date_btn btn btn-danger">최신순</button></span>
+          <span><button type="button" id="vote_count_button" class="vote_count_btn btn btn-danger">조회순</button></span>
       </div>
-    </div>
+  </div>
+  
 
     <div class="album py-5 bg-body-tertiary">
       <div class="container">
@@ -183,6 +189,7 @@
   <script src="../js/secret.js"></script>
   <script src="../js/abuses.js"></script>
   <script src="../js/validation.js"></script>
+  <script src="../js/autoSearch.js"></script>
   <script src="../js/search.js"></script>
   <script src="../js/playSlide.js"></script>
   <script src="../js/popSlide.js"></script>
