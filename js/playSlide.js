@@ -39,6 +39,17 @@ function updatePlayCardContent() {
       movie.overview;
     card.querySelector(".movie_average").textContent =
       movie.vote_average;
+
+    const isLoggedIn = auth.currentUser ? true : false;
+    let favoriteIcon = card.querySelector(".favorite");
+
+    if (favoriteIcon) {
+      card.removeChild(favoriteIcon);
+    }
+    if (isLoggedIn) {
+      favoriteIcon = createFavoriteIcon(movie.id);
+      card.appendChild(favoriteIcon);
+    }
   });
 }
 

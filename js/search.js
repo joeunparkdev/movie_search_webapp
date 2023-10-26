@@ -61,7 +61,10 @@ function createSearchCard(movie) {
   const isLoggedIn = auth.currentUser ? true : false;
   let favoriteIcon = card.querySelector(".favorite");
 
-  if (isLoggedIn && !favoriteIcon) {
+  if (favoriteIcon) {
+    card.removeChild(favoriteIcon);
+  }
+  if (isLoggedIn) {
     favoriteIcon = createFavoriteIcon(movie.id);
     card.appendChild(favoriteIcon);
   }
