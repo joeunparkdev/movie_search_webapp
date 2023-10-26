@@ -71,7 +71,13 @@ function filterAndDisplayReviews(reviews, movieId) {
   const filteredReviews = reviews.filter(
     (review) => review.movieId === movieId
   );
-
+  if (filteredReviews.length === 0) {
+    const noResultsMessage = document.querySelector(".no_results");
+    noResultsMessage.style.display = "block"; 
+  } else {
+    const noResultsMessage = document.querySelector(".no_results");
+    noResultsMessage.style.display = "none"; 
+  }
   for (const review of filteredReviews) {
     displayReview(review);
   }
@@ -97,18 +103,27 @@ async function hashPassword(password) {
   }
 }
 
+//별표 (최대 5개) 표시
+function displayStars(scoreInputValue) {
+  const starCharacter = '\u2B50'; // 별 이모티콘 유니코드 (⭐)
+  const stars = new Array(5).fill(starCharacter).fill(' ', scoreInputValue, 5).join('');
+
+  return stars;
+}
+
 // 리뷰 보여주기
 function displayReview(reviewData) {
   const reviewElement = document.createElement("div");
   reviewElement.classList.add("user-review");
+  const stars = displayStars(reviewData.score); 
   reviewElement.innerHTML = `
     <strong class="writer">${reviewData.name}</strong><br>
     <span class="review-text">${reviewData.reviewText}</span><br>
-    <span class="rating">${reviewData.score}</span><br>
+    <span class="rating">${stars}</span><br>
     <button class="delete-button">Delete</button>
     <button class="edit-button">Edit</button>
   `;
-
+  
   // 삭제 버튼 정의
   const deleteButton = reviewElement.querySelector(".delete-button");
 

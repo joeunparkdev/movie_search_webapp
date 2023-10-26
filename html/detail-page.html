@@ -11,18 +11,19 @@
 </head>
 
 <body>
-  <header class="p-1 d-flex flex-wrap align-items-center justify-content-md-between border-bottom border-danger">
+  <header class="p-1 d-flex flex-wrap align-items-center justify-content-between border-bottom border-danger">
     <div class="ms-5 col-md-3">
-      <a href="main.html" class="text-decoration-none title text-danger">
-        <p class="fs-30"></p>Flex Movie</p>
-      </a>
+        <a href="main.html" class="text-decoration-none title text-danger">
+            <p class="fs-30">Flex Movie</p>
+        </a>
     </div>
 
     <div class="me-5 col-md-3 text-end">
-      <button type="button" class="btn btn-outline-danger me-2">Login</button>
-      <button type="button" class="btn btn-danger">Sign-up</button>
-    </div> 
-  </header>
+        <button type="button" class="btn btn-outline-danger me-2">Login</button>
+        <a href="favorite-page.html" type="button" class="btn btn-danger">Favorites</a>
+    </div>
+</header>
+
 
   <section class="card_section">
     <h1 class="title text-danger detail_look">상세 보기</h1>
@@ -55,6 +56,7 @@
   </section>
 
   <section id='review-section'>
+    <h1 class="review-form-title text-danger">리뷰 기록</h1>
     <form id='review-form'>
       <div class="comment_block">
         <div class="comment_head">
@@ -92,6 +94,9 @@
   <section class="review-list-section">
     <h1 class="review-list-title text-danger">리뷰 목록</h1>
     <ul class="reviews-list" id='reviews-list'></ul>
+    <div class="no_results">
+      리뷰를 첫번째로 적어보세요
+    </div>
   </section>
 
 
