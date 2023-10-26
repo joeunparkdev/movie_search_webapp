@@ -19,9 +19,9 @@
     </div>
 
     <div class="me-5 col-md-3 text-end">
-      <button type="button" class="btn btn-outline-danger me-2">Login</button>
+      <button id='loginBtn' type="button" class="btn btn-outline-danger me-2">Login</button>
       <button type="button" class="btn btn-danger">Sign-up</button>
-    </div> 
+    </div>
   </header>
 
   <section class="card_section">
@@ -36,17 +36,20 @@
             <h5 class="card-title detail_title">Card title</h5>
             <p class="card-text detail_description">This is a wider card with supporting text below as a natural lead-in
               to additional content. This content is a little bit longer.</p>
-              <div class="card-list">
-            <p class="card-text detail_genreIds">장르</p>
-            <p><span class="card-text detail_releaseDate">개봉일</span>
-            <span class="card-text detail_runtime">상영시간</span>
-            <span class="card-text detail_status">영화 상태</span></p>
-             <p><span class="card-text detail_company">제작사</span><p>
-            <p class="card-text detail_average"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-            <p><span class="card-text detail_popularity">영화인기정도</span></p>
-            <p><span class="card-text detail_vote_count">조회수</span></p>
-            <p><span class="card-text detail_originalLanguage">원어</span>
-            <span class="card-text detail_spokenLanguages">구어</span></p>
+            <div class="card-list">
+              <p class="card-text detail_genreIds">장르</p>
+              <p><span class="card-text detail_releaseDate">개봉일</span>
+                <span class="card-text detail_runtime">상영시간</span>
+                <span class="card-text detail_status">영화 상태</span>
+              </p>
+              <p><span class="card-text detail_company">제작사</span>
+              <p>
+              <p class="card-text detail_average"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+              <p><span class="card-text detail_popularity">영화인기정도</span></p>
+              <p><span class="card-text detail_vote_count">조회수</span></p>
+              <p><span class="card-text detail_originalLanguage">원어</span>
+                <span class="card-text detail_spokenLanguages">구어</span>
+              </p>
             </div>
           </div>
         </div>
@@ -99,11 +102,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
     </script>
+  <script type='module' src='../js//review.js'></script>
   <script src='../js//abuses.js'></script>
   <script src='../js//validation.js'></script>
   <script src='../js/secret.js'></script>
   <script src='../js//detail-page.js'></script>
-  <script src='../js//review.js'></script>
+
 </body>
 
 </html>

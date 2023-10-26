@@ -1,3 +1,5 @@
+import { getUser } from "./firebase/authService.js";
+
 const reviewForm = document.getElementById("review-form");
 const reviews = document.getElementById("reviews-list");
 const scoreInputValue = getInputValue("score-select");
@@ -5,7 +7,6 @@ const scoreInputValue = getInputValue("score-select");
 let storedReviews = loadReviewsFromLocalStorage();
 
 const movieId = getMovieIdFromUrl();
-let nextId = parseInt(localStorage.getItem("nextId")) || 1;
 
 filterAndDisplayReviews(storedReviews, movieId);
 
@@ -26,10 +27,16 @@ async function handleReviewSubmission(e) {
 
   const hashedPassword = await hashPassword(passwordInputValue);
 
-  nextId++;
+  const user = getUser();
+  const userId = user ? user.uid : null;
+
+  if (!userId) {
+    alert("로그인이 필요합니다.");
+    return;
+  }
 
   const newReviewData = {
-    id: nextId,
+    id: userId,
     movieId: movieId,
     name: nameInputValue,
     reviewText: reviewInputValue,
@@ -63,7 +70,7 @@ function addNewReview(reviewData) {
   displayReview(reviewData);
   storedReviews.push(reviewData);
   localStorage.setItem("reviews", JSON.stringify(storedReviews));
-  localStorage.setItem("nextId", nextId.toString());
+  localStorage.setItem("userId", reviewData.id);
 }
 
 // 리뷰 영화별 필터링
