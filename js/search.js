@@ -1,6 +1,6 @@
 const searchURL = "https://api.themoviedb.org/3/search/movie?language=ko-KR&query=";
 const popularURL = "https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=";
-const posterURL = "https://www.themoviedb.org/t/p/w1280";
+const posterURL = "https://image.tmdb.org/t/p/w1280";
 const playURL = "https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=";
 
 let searchMovies;
@@ -56,26 +56,24 @@ function createSearchCard(movie) {
     average.textContent = movie.vote_average;
     card.appendChild(average);
 
-    if (document.querySelector(".vote_count").classList.contains("active")) {
-        const voteCount = document.createElement("span");
-        voteCount.classList.add("vote_count");
-        voteCount.textContent = `조회수: ${movie.vote_count}`;
-        card.appendChild(voteCount);
-    }
+    // movie.poster_path가 null인 경우에 대비하여 기본 이미지 URL을 사용
+    img.src = movie.poster_path ? posterURL + movie.poster_path : "기본 이미지 URL 또는 다른 이미지 URL";
 
-    if (document.querySelector(".vote_average").classList.contains("active")) {
-        const voteAverage = document.createElement("span");
-        voteAverage.classList.add("vote_average");
-        voteAverage.textContent = `별점: ${movie.vote_average}`;
-        card.appendChild(voteAverage);
-    }
 
-    if (document.querySelector(".release_date").classList.contains("active")) {
-        const releaseDate = document.createElement("span");
-        releaseDate.classList.add("release_date");
-        releaseDate.textContent = `개봉일: ${movie.release_date}`;
-        card.appendChild(releaseDate);
-    }
+    const voteCount = document.createElement("span");
+    voteCount.classList.add("vote_count");
+    voteCount.textContent = `조회수: ${movie.vote_count}`;
+    card.appendChild(voteCount);
+
+    const voteAverage = document.createElement("span");
+    voteAverage.classList.add("vote_average");
+    voteAverage.textContent = `별점: ${movie.vote_average}`;
+    card.appendChild(voteAverage);
+
+    const releaseDate = document.createElement("span");
+    releaseDate.classList.add("release_date");
+    releaseDate.textContent = `개봉일: ${movie.release_date}`;
+    card.appendChild(releaseDate);
 
     initEventCard(card);
 
@@ -124,7 +122,7 @@ document.querySelector(".search_button").addEventListener("click", async (e) => 
 
 //버튼들 숨기기
 function hideSortButtons() {
-    const sortButtons = document.querySelectorAll(".vote_average, .vote_count, .release_date");
+    const sortButtons = document.querySelectorAll(".vote_average_btn, .vote_count_btn, .release_date_btn");
     sortButtons.forEach(button => {
         button.style.display = "none";
     });
@@ -132,69 +130,78 @@ function hideSortButtons() {
 
 //버튼들 보여주기
 function showSortButtons() {
-    const sortButtons = document.querySelectorAll(".vote_average, .vote_count, .release_date");
+    const sortButtons = document.querySelectorAll(".vote_average_btn, .vote_count_btn, .release_date_btn");
     sortButtons.forEach(button => {
-        button.style.display = "inline-block"; // Adjust the display style as needed
+        button.style.display = "inline-block";
     });
 }
 
-//조회수 정렬
-document.querySelector(".vote_count").addEventListener("click", async function voteCount() {
-    // 오직 조회순만 active하게 만들기
-    if (!document.querySelector(".vote_count").classList.contains("active")) {
-        document.querySelector(".vote_count").classList.add("active");
-        document.querySelector(".vote_average").classList.remove("active");
-        document.querySelector(".release_date").classList.remove("active");
+//설명 숨기기
+function hideSort() {
+    const sortElements = document.querySelectorAll(".vote_count, .vote_average, .release_date");
+    console.log("Hiding element:", sortElements);
+    sortElements.forEach(element => {
+        console.log("Hiding element:", element);
+        element.style.display = "none";
+    });
+}
 
-        deleteSearchCard();
-
-        searchMovies.sort((a, b) => {
-            return b.vote_count - a.vote_count;
-        });
-
-        searchMovies.forEach((movie) => {
-            createSearchCard(movie);
-        });
+//설명 보여주기
+function showSort(elementSelector) {
+    const element = document.querySelectorAll(elementSelector);
+    element.forEach(showElement => {
+        console.log("Hiding element:", showElement);
+        showElement.style.display = "inline-block";
+    });
     }
+
+
+//조회수 정렬
+document.querySelector(".vote_count_btn").addEventListener("click", async function voteCount() {
+    // 오직 조회순만 active하게 만들기
+    hideSort();
+    deleteSearchCard();
+
+    searchMovies.sort((a, b) => {
+        return b.vote_count - a.vote_count;
+    });
+
+    searchMovies.forEach((movie) => {
+        createSearchCard(movie);
+    });
+    showSort(".vote_count");
 });
 
 //별점순 정렬
-document.querySelector(".vote_average").addEventListener("click", async function voteAverage() {
+document.querySelector(".vote_average_btn").addEventListener("click", async function voteAverage() {
     // 오직 별점순만 active하게 만들기
-    if (!document.querySelector(".vote_average").classList.contains("active")) {
-        document.querySelector(".vote_average").classList.add("active");
-        document.querySelector(".vote_count").classList.remove("active");
-        document.querySelector(".release_date").classList.remove("active");
+    hideSort();
 
-        deleteSearchCard();
+    deleteSearchCard();
 
-        searchMovies.sort((a, b) => {
-            return b.vote_average - a.vote_average;
-        });
+    searchMovies.sort((a, b) => {
+        return b.vote_average - a.vote_average;
+    });
 
-        searchMovies.forEach((movie) => {
-            createSearchCard(movie);
-        });
-    }
+    searchMovies.forEach((movie) => {
+        createSearchCard(movie);
+    });
+    showSort(".vote_average");
 });
 
 //최신순 정렬
-document.querySelector(".release_date").addEventListener("click", async function releaseDate() {
+document.querySelector(".release_date_btn").addEventListener("click", async function releaseDate() {
     // 오직 최신순만 active하게 만들기
-    if (!document.querySelector(".release_date").classList.contains("active")) {
-        document.querySelector(".release_date").classList.add("active");
-        document.querySelector(".vote_count").classList.remove("active");
-        document.querySelector(".vote_average").classList.remove("active");
+    hideSort();
+    deleteSearchCard();
 
-        deleteSearchCard();
+    searchMovies.sort((a, b) => {
+        return new Date(b.release_date) - new Date(a.release_date);
+    });
 
-        searchMovies.sort((a, b) => {
-            return new Date(b.release_date) - new Date(a.release_date);
-        });
-
-        searchMovies.forEach((movie) => {
-            createSearchCard(movie);
-        });
-    }
+    searchMovies.forEach((movie) => {
+        createSearchCard(movie);
+    });
+    showSort(".release_date");
 });
 

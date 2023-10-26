@@ -1,3 +1,4 @@
+
 .search_box {
     width: 85%;
     height: 40px;
@@ -9,6 +10,9 @@
     padding: 6px;
 
     border-radius: 8px;
+}
+.vote_count, .vote_average, .release_date {
+    display: none;
 }
 
 .search_box input {
