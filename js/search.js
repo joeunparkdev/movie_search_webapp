@@ -12,6 +12,7 @@ async function getMovies(title) {
     });
 
     const searchMovies = response.data.results;
+
     return searchMovies;
   } catch (e) {
     console.log("api 요청 에러");
@@ -54,8 +55,8 @@ function createSearchCard(movie) {
   average.textContent = movie.vote_average;
   card.appendChild(average);
 
-    // movie.poster_path가 null인 경우에 대비하여 기본 이미지 URL을 사용
-    img.src = movie.poster_path ? posterURL + movie.poster_path : "기본 이미지 URL 또는 다른 이미지 URL";
+  // movie.poster_path가 null인 경우에 대비하여 기본 이미지 URL을 사용
+  img.src = movie.poster_path ? posterURL + movie.poster_path : "기본 이미지 URL 또는 다른 이미지 URL";
 
 
   const isLoggedIn = auth.currentUser ? true : false;
@@ -69,20 +70,20 @@ function createSearchCard(movie) {
     card.appendChild(favoriteIcon);
   }
 
-    const voteCount = document.createElement("span");
-    voteCount.classList.add("vote_count");
-    voteCount.textContent = `조회수: ${movie.vote_count}`;
-    card.appendChild(voteCount);
+  const voteCount = document.createElement("span");
+  voteCount.classList.add("vote_count");
+  voteCount.textContent = `조회수: ${movie.vote_count}`;
+  card.appendChild(voteCount);
 
-    const voteAverage = document.createElement("span");
-    voteAverage.classList.add("vote_average");
-    voteAverage.textContent = `별점: ${movie.vote_average}`;
-    card.appendChild(voteAverage);
+  const voteAverage = document.createElement("span");
+  voteAverage.classList.add("vote_average");
+  voteAverage.textContent = `별점: ${movie.vote_average}`;
+  card.appendChild(voteAverage);
 
-    const releaseDate = document.createElement("span");
-    releaseDate.classList.add("release_date");
-    releaseDate.textContent = `개봉일: ${movie.release_date}`;
-    card.appendChild(releaseDate);
+  const releaseDate = document.createElement("span");
+  releaseDate.classList.add("release_date");
+  releaseDate.textContent = `개봉일: ${movie.release_date}`;
+  card.appendChild(releaseDate);
 
   initEventCard(card);
 
@@ -135,85 +136,85 @@ document
 
 //버튼들 숨기기
 function hideSortButtons() {
-    const sortButtons = document.querySelectorAll(".vote_average_btn, .vote_count_btn, .release_date_btn");
-    sortButtons.forEach(button => {
-        button.style.display = "none";
-    });
+  const sortButtons = document.querySelectorAll(".vote_average_btn, .vote_count_btn, .release_date_btn");
+  sortButtons.forEach(button => {
+    button.style.display = "none";
+  });
 }
 
 //버튼들 보여주기
 function showSortButtons() {
-    const sortButtons = document.querySelectorAll(".vote_average_btn, .vote_count_btn, .release_date_btn");
-    sortButtons.forEach(button => {
-        button.style.display = "inline-block";
-    });
+  const sortButtons = document.querySelectorAll(".vote_average_btn, .vote_count_btn, .release_date_btn");
+  sortButtons.forEach(button => {
+    button.style.display = "inline-block";
+  });
 }
 
 //설명 숨기기
 function hideSort() {
-    const sortElements = document.querySelectorAll(".vote_count, .vote_average, .release_date");
-    console.log("Hiding element:", sortElements);
-    sortElements.forEach(element => {
-        console.log("Hiding element:", element);
-        element.style.display = "none";
-    });
+  const sortElements = document.querySelectorAll(".vote_count, .vote_average, .release_date");
+  console.log("Hiding element:", sortElements);
+  sortElements.forEach(element => {
+    console.log("Hiding element:", element);
+    element.style.display = "none";
+  });
 }
 
 //설명 보여주기
 function showSort(elementSelector) {
-    const element = document.querySelectorAll(elementSelector);
-    element.forEach(showElement => {
-        console.log("Hiding element:", showElement);
-        showElement.style.display = "inline-block";
-    });
-    }
+  const element = document.querySelectorAll(elementSelector);
+  element.forEach(showElement => {
+    console.log("Hiding element:", showElement);
+    showElement.style.display = "inline-block";
+  });
+}
 
 
 //조회수 정렬
 document.querySelector(".vote_count_btn").addEventListener("click", async function voteCount() {
-    // 오직 조회순만 active하게 만들기
-    hideSort();
-    deleteSearchCard();
+  // 오직 조회순만 active하게 만들기
+  hideSort();
+  deleteSearchCard();
 
-    searchMovies.sort((a, b) => {
-        return b.vote_count - a.vote_count;
-    });
+  searchMovies.sort((a, b) => {
+    return b.vote_count - a.vote_count;
+  });
 
-    searchMovies.forEach((movie) => {
-        createSearchCard(movie);
-    });
-    showSort(".vote_count");
+  searchMovies.forEach((movie) => {
+    createSearchCard(movie);
+  });
+  showSort(".vote_count");
 });
 
 //별점순 정렬
 document.querySelector(".vote_average_btn").addEventListener("click", async function voteAverage() {
-    // 오직 별점순만 active하게 만들기
-    hideSort();
+  // 오직 별점순만 active하게 만들기
+  hideSort();
 
-    deleteSearchCard();
+  deleteSearchCard();
 
-    searchMovies.sort((a, b) => {
-        return b.vote_average - a.vote_average;
-    });
+  searchMovies.sort((a, b) => {
+    return b.vote_average - a.vote_average;
+  });
 
-    searchMovies.forEach((movie) => {
-        createSearchCard(movie);
-    });
-    showSort(".vote_average");
+  searchMovies.forEach((movie) => {
+    createSearchCard(movie);
+  });
+  showSort(".vote_average");
 });
 
 //최신순 정렬
 document.querySelector(".release_date_btn").addEventListener("click", async function releaseDate() {
-    // 오직 최신순만 active하게 만들기
-    hideSort();
-    deleteSearchCard();
+  // 오직 최신순만 active하게 만들기
+  hideSort();
+  deleteSearchCard();
 
-    searchMovies.sort((a, b) => {
-        return new Date(b.release_date) - new Date(a.release_date);
-    });
+  searchMovies.sort((a, b) => {
+    return new Date(b.release_date) - new Date(a.release_date);
+  });
 
-    searchMovies.forEach((movie) => {
-        createSearchCard(movie);
-    });
-    showSort(".release_date");
+  searchMovies.forEach((movie) => {
+    createSearchCard(movie);
+  });
+  showSort(".release_date");
 });
