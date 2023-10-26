@@ -1,0 +1,18 @@
+.search-container {
+    margin-bottom: 20px;
+}
+
+.autocomplete-container {
+    display: none;
+    margin-top: 10px;
+}
+
+.autocomplete-card {
+    position: absolute;
+    z-index: 100;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+}
