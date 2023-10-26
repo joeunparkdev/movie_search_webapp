@@ -17,23 +17,7 @@ function initEventCard(card) {
     .querySelector(".detail_button")
     .addEventListener("click", (e) => {
       const target = e.currentTarget.parentNode;
-
       const movieId = target.dataset.id;
-
-      localStorage.setItem(
-        `movieData-${movieId}`,
-        JSON.stringify({
-          poster_url: target.querySelector("img").src,
-          title: target.querySelector(".movie_title").textContent,
-          description:
-            target.querySelector(".movie_overview").textContent,
-          average: target.querySelector(".movie_average").textContent,
-          original_language: target.querySelector(".movie_originalLanguage").textContent,
-          popularity: target.querySelector(".movie_popularity").textContent,
-          release_date: target.querySelector(".movie_releaseDate").textContent,
-          genre_ids: target.querySelector(".movie_genreIds").textContent,
-        })
-      );
 
       window.location.href = `./detail-page.html?id=${movieId}`;
     });

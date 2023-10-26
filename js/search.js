@@ -1,166 +1,220 @@
-const searchURL = "https://api.themoviedb.org/3/search/movie?language=ko-KR&query=";
-const popularURL = "https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=";
-const posterURL = "https://www.themoviedb.org/t/p/w1280";
-const playURL = "https://api.themoviedb.org/3/movie/now_playing?language=ko-KR&page=";
+import { auth } from "./firebase/firebaseConfig.js";
+import { createFavoriteIcon } from "./firebase/databaseService.js";
 
 let searchMovies;
 
 async function getMovies(title) {
-    try {
-        const response = await axios.get(searchURL + title, {
-            headers: {
-                Authorization: `Bearer ${ACCESS_TOKEN}`,
-            },
-        });
-        const searchMovies = response.data.results;
-        console.log(searchMovies);
+  try {
+    const response = await axios.get(searchURL + title, {
+      headers: {
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+      },
+    });
 
-        // 장르 변환
-        for (i = 0; i < searchMovies.length; i++) {
-            const { genre_ids } = searchMovies[i];
-            console.log(genre_ids);
-            for (j = 0; j < genre_ids.length; j++) {
-                for (k = 0; k < genres.length; k++) {
-                    if (genre_ids[j] === genres[k].id) {
-                        genre_ids[j] = genres[k].name;
-                    }
-                }
-            }
-        };
+    const searchMovies = response.data.results;
 
-        return searchMovies;
-    } catch (e) {
-        console.log("api 요청 에러");
-        return;
-    }
+    return searchMovies;
+  } catch (e) {
+    console.log("api 요청 에러");
+    return;
+  }
 }
 
-
 function createSearchCard(movie) {
-    const searchList = document.querySelector(".search_list");
-    const col = document.createElement("div");
-    col.classList.add("col");
+  const searchList = document.querySelector(".search_list");
+  const col = document.createElement("div");
+  col.classList.add("col");
 
-    const card = document.createElement("div");
-    card.classList.add("card", "card_");
-    card.dataset.id = movie.id;
+  const card = document.createElement("div");
+  card.classList.add("card", "card_");
+  card.dataset.id = movie.id;
 
-    const img = document.createElement("img");
-    img.classList.add("card-img-top");
-    img.src = posterURL + movie.poster_path;
-    card.appendChild(img);
+  const img = document.createElement("img");
+  img.classList.add("card-img-top");
+  img.src = posterURL + movie.poster_path;
+  card.appendChild(img);
 
-    const button = document.createElement("button");
-    button.type = "button";
-    button.classList.add("detail_button", "btn", "btn-danger");
-    button.textContent = "상세보기";
-    card.appendChild(button);
+  const button = document.createElement("button");
+  button.type = "button";
+  button.classList.add("detail_button", "btn", "btn-danger");
+  button.textContent = "상세보기";
+  card.appendChild(button);
 
-    const span = document.createElement("span");
-    span.classList.add("movie_title");
-    span.textContent = movie.title;
-    card.appendChild(span);
+  const span = document.createElement("span");
+  span.classList.add("movie_title");
+  span.textContent = movie.title;
+  card.appendChild(span);
 
-    const p = document.createElement("p");
-    p.classList.add("movie_overview");
-    p.textContent = movie.overview;
-    card.appendChild(p);
+  const p = document.createElement("p");
+  p.classList.add("movie_overview");
+  p.textContent = movie.overview;
+  card.appendChild(p);
 
-    const average = document.createElement("span");
-    average.classList.add("movie_average");
-    average.textContent = movie.vote_average;
-    card.appendChild(average);
+  const average = document.createElement("span");
+  average.classList.add("movie_average");
+  average.textContent = movie.vote_average;
+  card.appendChild(average);
 
-    const popularity = document.createElement("span");
-    popularity.classList.add("movie_popularity");
-    popularity.textContent = movie.popularity;
-    card.appendChild(popularity);
+  // movie.poster_path가 null인 경우에 대비하여 기본 이미지 URL을 사용
+  img.src = movie.poster_path ? posterURL + movie.poster_path : "기본 이미지 URL 또는 다른 이미지 URL";
 
-    const releaseDate = document.createElement("span");
-    releaseDate.classList.add("movie_releaseDate");
-    releaseDate.textContent = movie.release_date;
-    card.appendChild(releaseDate);
 
-    const originalLanguage = document.createElement("span");
-    originalLanguage.classList.add("movie_originalLanguage");
-    originalLanguage.textContent = movie.original_language;
-    card.appendChild(originalLanguage);
+  const isLoggedIn = auth.currentUser ? true : false;
+  let favoriteIcon = card.querySelector(".favorite");
 
-    const genreIds = document.createElement("span");
-    genreIds.classList.add("movie_genreIds");
-    genreIds.textContent = movie.genre_ids;
-    card.appendChild(genreIds);
+  if (favoriteIcon) {
+    card.removeChild(favoriteIcon);
+  }
+  if (isLoggedIn) {
+    favoriteIcon = createFavoriteIcon(movie.id);
+    card.appendChild(favoriteIcon);
+  }
 
-    initEventCard(card);
+  const voteCount = document.createElement("span");
+  voteCount.classList.add("vote_count");
+  voteCount.textContent = `조회수: ${movie.vote_count}`;
+  card.appendChild(voteCount);
 
-    col.appendChild(card);
-    searchList.appendChild(col);
+  const voteAverage = document.createElement("span");
+  voteAverage.classList.add("vote_average");
+  voteAverage.textContent = `별점: ${movie.vote_average}`;
+  card.appendChild(voteAverage);
+
+  const releaseDate = document.createElement("span");
+  releaseDate.classList.add("release_date");
+  releaseDate.textContent = `개봉일: ${movie.release_date}`;
+  card.appendChild(releaseDate);
+
+  initEventCard(card);
+
+  col.appendChild(card);
+  searchList.appendChild(col);
 }
 
 function deleteSearchCard() {
-    let list = document.querySelectorAll(".search_list .col");
-    list.forEach((col) => {
-        col.remove();
-    });
+  let list = document.querySelectorAll(".search_list .col");
+  list.forEach((col) => {
+    col.remove();
+  });
 }
 
-document.querySelector(".search_button").addEventListener("click", async (e) => {
+document
+  .querySelector(".search_button")
+  .addEventListener("click", async (e) => {
     const searchBox = document.querySelector(".search_box input");
     const title = searchBox.value;
     // 유효성 검사
     if (!searchValidationCheck(title)) {
-        searchBox.value = "";
-        return;
+      searchBox.value = "";
+      return;
     }
 
     searchMovies = await getMovies(title);
 
     document.querySelector(".search_line").style.display = "flex";
-    document.querySelector(".search_keyword").textContent = `"${title}"`;
+    document.querySelector(
+      ".search_keyword"
+    ).textContent = `"${title}"`;
+
+    if (searchMovies.length === 0) {
+      const noResultsMessage = document.querySelector(".no_results");
+      noResultsMessage.style.display = "block";
+      hideSortButtons();
+    } else {
+      const noResultsMessage = document.querySelector(".no_results");
+      noResultsMessage.style.display = "none";
+      showSortButtons();
+    }
 
     deleteSearchCard();
 
     searchMovies.forEach((movie) => {
-        createSearchCard(movie);
+      createSearchCard(movie);
     });
     searchBox.value = "";
-});
+  });
+
+//버튼들 숨기기
+function hideSortButtons() {
+  const sortButtons = document.querySelectorAll(".vote_average_btn, .vote_count_btn, .release_date_btn");
+  sortButtons.forEach(button => {
+    button.style.display = "none";
+  });
+}
+
+//버튼들 보여주기
+function showSortButtons() {
+  const sortButtons = document.querySelectorAll(".vote_average_btn, .vote_count_btn, .release_date_btn");
+  sortButtons.forEach(button => {
+    button.style.display = "inline-block";
+  });
+}
+
+//설명 숨기기
+function hideSort() {
+  const sortElements = document.querySelectorAll(".vote_count, .vote_average, .release_date");
+  console.log("Hiding element:", sortElements);
+  sortElements.forEach(element => {
+    console.log("Hiding element:", element);
+    element.style.display = "none";
+  });
+}
+
+//설명 보여주기
+function showSort(elementSelector) {
+  const element = document.querySelectorAll(elementSelector);
+  element.forEach(showElement => {
+    console.log("Hiding element:", showElement);
+    showElement.style.display = "inline-block";
+  });
+}
+
 
 //조회수 정렬
-document.querySelector(".vote_count").addEventListener("click", async function voteCount() {
-    searchMovies.sort((a, b) => {
-        return b.vote_count - a.vote_count;
-    });
+document.querySelector(".vote_count_btn").addEventListener("click", async function voteCount() {
+  // 오직 조회순만 active하게 만들기
+  hideSort();
+  deleteSearchCard();
 
-    deleteSearchCard();
+  searchMovies.sort((a, b) => {
+    return b.vote_count - a.vote_count;
+  });
 
-    searchMovies.forEach((movie) => {
-        createSearchCard(movie);
-    });
+  searchMovies.forEach((movie) => {
+    createSearchCard(movie);
+  });
+  showSort(".vote_count");
 });
 
 //별점순 정렬
-document.querySelector(".vote_average").addEventListener("click", async function voteAverage() {
-    searchMovies.sort((a, b) => {
-        return b.vote_average - a.vote_average;
-    });
+document.querySelector(".vote_average_btn").addEventListener("click", async function voteAverage() {
+  // 오직 별점순만 active하게 만들기
+  hideSort();
 
-    deleteSearchCard();
+  deleteSearchCard();
 
-    searchMovies.forEach((movie) => {
-        createSearchCard(movie);
-    });
+  searchMovies.sort((a, b) => {
+    return b.vote_average - a.vote_average;
+  });
+
+  searchMovies.forEach((movie) => {
+    createSearchCard(movie);
+  });
+  showSort(".vote_average");
 });
 
 //최신순 정렬
-document.querySelector(".release_date").addEventListener("click", async function releaseDate() {
-    searchMovies.sort((a, b) => {
-        return new Date(b.release_date) - new Date(a.release_date);
-    });
+document.querySelector(".release_date_btn").addEventListener("click", async function releaseDate() {
+  // 오직 최신순만 active하게 만들기
+  hideSort();
+  deleteSearchCard();
 
-    deleteSearchCard();
+  searchMovies.sort((a, b) => {
+    return new Date(b.release_date) - new Date(a.release_date);
+  });
 
-    searchMovies.forEach((movie) => {
-        createSearchCard(movie);
-    });
+  searchMovies.forEach((movie) => {
+    createSearchCard(movie);
+  });
+  showSort(".release_date");
 });
