@@ -14,7 +14,7 @@ window.onload = async function () {
       throw new Error("HTTP error " + response.status);
     }
     const movieData = await response.json();
-    console.log(movieData);
+    // console.log(movieData);
 
     const genre = movieData.genres;
     genrelist = genre.map((g) => {
