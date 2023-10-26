@@ -44,31 +44,31 @@ export function createFavoriteIcon(movieId) {
   const favoriteIcon = document.createElement("span");
   favoriteIcon.classList.add("favorite");
   favoriteIcon.style.cursor = "pointer";
-  favoriteIcon.textContent = "☆";
+  favoriteIcon.textContent = "♡";
 
   auth.onAuthStateChanged((user) => {
     if (user) {
       getFavoriteMovies(user.uid).then((favorites) => {
         if (favorites.includes(movieId)) {
-          favoriteIcon.textContent = "★";
+          favoriteIcon.textContent = "♥";
         } else {
-          favoriteIcon.textContent = "☆";
+          favoriteIcon.textContent = "♡";
         }
       });
     } else {
-      favoriteIcon.textContent = "☆";
+      favoriteIcon.textContent = "♡";
     }
   });
 
   favoriteIcon.addEventListener("click", () => {
     if (auth.currentUser) {
-      if (favoriteIcon.textContent === "☆") {
+      if (favoriteIcon.textContent === "♡") {
         updateFavoriteMovies(
           auth.currentUser.uid,
           movieId,
           true
         ).then(() => {
-          favoriteIcon.textContent = "★";
+          favoriteIcon.textContent = "♥";
         });
       } else {
         updateFavoriteMovies(
@@ -76,7 +76,7 @@ export function createFavoriteIcon(movieId) {
           movieId,
           false
         ).then(() => {
-          favoriteIcon.textContent = "☆";
+          favoriteIcon.textContent = "♡";
         });
       }
     }

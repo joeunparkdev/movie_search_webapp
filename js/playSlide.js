@@ -73,6 +73,8 @@ document
   });
 
 getPlayMovie(30).then((data) => {
-  playMovies = data;
-  updatePlayCardContent();
+  setTimeout(() => {
+    playMovies = data;
+    updatePlayCardContent();
+  }, 500);
 });
