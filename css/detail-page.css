@@ -25,10 +25,41 @@
   margin: 30px auto 30px auto;
 }
 
+.detail_releaseDate{
+  font-size: 16px;
+  margin: 30px auto 30px auto;
+  font-weight: bold;
+}
+
+.detail_originalLanguage{
+  font-size: 16px;
+  margin: 30px auto 30px auto;
+  font-weight: bold;
+}
+
+.detail_popularity{
+  font-size: 16px;
+  margin: 30px auto 30px auto;
+  font-weight: bold;
+}
+
+.detail_average{
+  font-size: 16px;
+  margin: 30px auto 30px auto;
+  font-weight: bold;
+}
+
+.detail_genreIds{
+  font-size: 16px;
+  margin: 30px auto 30px auto;
+  font-weight: bold;
+}
+
 .detail_description_title{
   font-size: 20px;
+  margin: 20px auto 30px auto;
   font-weight: bold;
-  margin: 230px auto 30px auto;
+  
 }
 
 .detail_description{
@@ -37,7 +68,3 @@
   border: 1px solid #ff5555;
   border-radius: 4px;
 }
-
-/* .detail_originalLanguage{
-  background-color: green;
-} */

@@ -13,6 +13,17 @@ async function getPlayMovie(n) {
                 },
             });
             const pageMovies = response.data.results;
+            // 장르 변환
+            for (i = 0; i < pageMovies.length; i++) {
+                const {genre_ids} = pageMovies[i];
+                for (j = 0; j < genre_ids.length; j++) {
+                    for (k = 0; k < genres.length; k++) {
+                        if (genre_ids[j] === genres[k].id) {
+                            genre_ids[j] = genres[k].name;
+                        }
+                    }
+                }
+            };
             movies.push(...pageMovies);
         }
     } catch (e) {
@@ -37,6 +48,7 @@ function updatePlayCardContent() {
         card.querySelector(".movie_popularity").textContent = movie.popularity;
         card.querySelector(".movie_releaseDate").textContent = movie.release_date;
         card.querySelector(".movie_originalLanguage").textContent = movie.original_language;
+        card.querySelector(".movie_genreIds").textContent = movie.genre_ids;
     });
 }
 
@@ -61,5 +73,4 @@ getPlayMovie(30)
     playMovies = data;
     updatePlayCardContent();
 });
-
 

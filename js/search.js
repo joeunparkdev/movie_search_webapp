@@ -14,6 +14,20 @@ async function getMovies(title) {
         });
         const searchMovies = response.data.results;
         console.log(searchMovies);
+
+        // 장르 변환
+        for (i = 0; i < searchMovies.length; i++) {
+            const { genre_ids } = searchMovies[i];
+            console.log(genre_ids);
+            for (j = 0; j < genre_ids.length; j++) {
+                for (k = 0; k < genres.length; k++) {
+                    if (genre_ids[j] === genres[k].id) {
+                        genre_ids[j] = genres[k].name;
+                    }
+                }
+            }
+        };
+
         return searchMovies;
     } catch (e) {
         console.log("api 요청 에러");
@@ -72,6 +86,11 @@ function createSearchCard(movie) {
     originalLanguage.textContent = movie.original_language;
     card.appendChild(originalLanguage);
 
+    const genreIds = document.createElement("span");
+    genreIds.classList.add("movie_genreIds");
+    genreIds.textContent = movie.genre_ids;
+    card.appendChild(genreIds);
+
     initEventCard(card);
 
     col.appendChild(card);
@@ -95,7 +114,7 @@ document.querySelector(".search_button").addEventListener("click", async (e) => 
     }
 
     searchMovies = await getMovies(title);
-    
+
     document.querySelector(".search_line").style.display = "flex";
     document.querySelector(".search_keyword").textContent = `"${title}"`;
 

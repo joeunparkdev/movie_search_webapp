@@ -15,15 +15,17 @@ window.onload = function () {
     document.querySelector(".detail_description").innerText =
       movieData.description;
     document.querySelector(".detail_average").innerText =
-      "평점 " + movieData.average;
-    document.querySelector(".detail_originalLanguage").textContent =
-      movieData.original_language;
+      "평점 : " + movieData.average;
+    document.querySelector(".detail_originalLanguage").innerText =
+    "원어 : " + movieData.original_language;
     document.querySelector(".detail_popularity").innerText =
-      movieData.popularity;
+    "영화인기정도 : " + movieData.popularity;
     document.querySelector(".detail_releaseDate").innerText =
-      movieData.release_date;
+    "개봉일 : " + movieData.release_date;
+    document.querySelector(".detail_genreIds").innerText =
+    "장르 : " + movieData.genre_ids;
 
-      
+
   } else {
     alert("영화 정보를 불러올 수 없습니다.");
   }

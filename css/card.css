@@ -32,6 +32,6 @@
     position: absolute;
 }
 
-.card_ .movie_overview, .movie_average {
+.card_ .movie_overview, .movie_average, .movie_popularity, .movie_releaseDate, .movie_originalLanguage, .movie_genreIds {
     display:none;
 }

@@ -31,6 +31,7 @@ function initEventCard(card) {
           original_language: target.querySelector(".movie_originalLanguage").textContent,
           popularity: target.querySelector(".movie_popularity").textContent,
           release_date: target.querySelector(".movie_releaseDate").textContent,
+          genre_ids: target.querySelector(".movie_genreIds").textContent,
         })
       );
 
