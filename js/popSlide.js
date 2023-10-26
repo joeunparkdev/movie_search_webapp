@@ -73,6 +73,8 @@ document
   });
 
 getPopularMovie(30).then((data) => {
-  popularMovies = data;
-  updatePopCardContent();
+  setTimeout(() => {
+    popularMovies = data;
+    updatePopCardContent();
+  }, 500);
 });

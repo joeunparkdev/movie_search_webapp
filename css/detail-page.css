@@ -20,6 +20,30 @@
 }
 
 .detail_title {
-  font-size: 28px;
+  font-size: 30px;
   font-weight: bold;
+  margin: 40px auto 40px auto;
+  padding: 5px;
+  border: 1px solid #ff5555;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.detail_description{
+  font-size: 20px;
+  font-weight: bold;
+  margin: 40px auto 40px auto;
+  padding: 5px;
+  border: 1px solid #ff5555;
+  border-radius: 4px;
+}
+
+.card-list{
+  font-size: 20px;
+  font-weight: bold;
+  margin: 40px auto 40px auto;
+  padding: 20px;
+  border: 1px solid #ff5555;
+  border-radius: 4px;
+  border-collapse: collapse;
 }
