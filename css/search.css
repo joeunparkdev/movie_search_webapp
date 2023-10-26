@@ -1,16 +1,13 @@
-
 .search_box {
     width: 85%;
     height: 40px;
-
     position: relative;
-
     margin: 0 auto;
     margin-top: 40px;
     padding: 6px;
-
     border-radius: 8px;
 }
+
 .vote_count, .vote_average, .release_date {
     display: none;
 }
@@ -26,25 +23,23 @@ input:focus {
 
 .search_box .search_button {
     height: 40px;
-    
     position: absolute;
     top: 0;
     right: 0;
-
     font-size: 16px;
+
 }
 
 .search_line {
     width: 90%;
-
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 0;
-
     display: none;
     justify-content: space-between;
     font-size: 24px;
     font-weight: bold;
+
 }
 
 .search_keyword {
