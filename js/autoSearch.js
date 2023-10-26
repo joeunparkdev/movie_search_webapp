@@ -62,6 +62,7 @@ $search.oninput = async () => {
     if (matchDataList.length > 0) {
         showList(matchDataList, value, selectedAutoSuggestion);
         $autoComplete.style.display = "block";
+        $autoComplete.style.textAlign = "center";
         const autoSuggestedItems = document.querySelectorAll(".autocomplete > div");
         autoSuggestedItems.forEach((item, index) => {
             item.addEventListener("click", () => {
