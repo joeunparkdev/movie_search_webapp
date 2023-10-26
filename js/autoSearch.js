@@ -7,11 +7,18 @@ let selectedAutoSuggestion = 0;
 
 const fetchMovies = async (url) => {
     try {
-        const response = await fetch(url);
-        if (!response.ok) {
+        const response = await axios.get(url, {
+            headers: {
+                Authorization: `Bearer ${ACCESS_TOKEN}`,
+            },
+        });
+
+        if (response.status !== 200) {
             throw new Error(`API 요청이 실패했습니다. 응답 코드: ${response.status}`);
         }
-        const data = await response.json();
+        
+        const data = response.data;
+
         if (data.results) {
             dataList = data.results;
         } else {
@@ -21,6 +28,7 @@ const fetchMovies = async (url) => {
         console.error('영화를 가져오는 중 오류가 발생했습니다:', error);
     }
 };
+
 
 // 자동완성 목록을 화면에 보여줌
 const showList = (data, value, selectedAutoSuggestion) => {
@@ -46,23 +54,19 @@ const handleSelection = (title) => {
 // 검색 입력시
 $search.onkeyup = async (event) => {
     const value = $search.value.trim();
-
-    if (value.length > 0) {
-        await fetchMovies(autoSearchURL + value);
-    }
-
+    await fetchMovies(autoSearchURL + value);
     const matchDataList = value
         ? dataList.map((movie) => movie.title).filter((title) => title.includes(value))
         : [];
 
     switch (event.keyCode) {
-        case 38:
+        case 1:
             selectedAutoSuggestion = Math.max(selectedAutoSuggestion - 1, 0);
             break;
-        case 40:
+        case 2:
             selectedAutoSuggestion = Math.min(selectedAutoSuggestion + 1, matchDataList.length - 1);
             break;
-        case 13:
+        case 3:
             $search.value = matchDataList[selectedAutoSuggestion] || "";
             selectedAutoSuggestion = 0;
             matchDataList.length = 0;
