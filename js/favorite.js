@@ -1,6 +1,6 @@
 import { db } from "./firebase/firebaseConfig.js";
 import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
 
 function createFavoriteCard(movie) {
     const favoriteList = document.querySelector(".favorite_list");
@@ -46,6 +46,13 @@ function createFavoriteCard(movie) {
     favoriteList.appendChild(col);
 }
 
+function deleteFavoriteCard() {
+    let list = document.querySelectorAll(".favorite_list .col");
+    list.forEach((col) => {
+      col.remove();
+    });
+  }
+
 async function getMovieForId(movieId) {
     try {
         const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR&api_key=${API_KEY}`);
@@ -62,15 +69,17 @@ async function getMovieForId(movieId) {
 }
 
 async function getFavoriteMovies() {
+    deleteFavoriteCard();
+
     const auth = await getAuth();
+    if (!auth.currentUser) {
+        alert("로그인이 필요합니다!");
+        return;
+    }
+
     const user = auth.currentUser.uid;
-    console.log(user);
 
-    const favoriteRef = ref(db, `users/1uEwi2oPANdHA3YyHqMrnAev9QI2/favorites`);
-
-    // const favoriteData = (await onValue(favoriteRef)).val();
-
-    // console.log(favoriteData);
+    const favoriteRef = ref(db, `users/${user}/favorites`);
 
     onValue(favoriteRef, async (snapshot) => {
         const favoriteData = snapshot.val();
@@ -83,4 +92,6 @@ async function getFavoriteMovies() {
     });
 }
 
-setTimeout(getFavoriteMovies, 1000);
+onAuthStateChanged(getAuth(), (user) => {
+    setTimeout(getFavoriteMovies, 1000);
+});
