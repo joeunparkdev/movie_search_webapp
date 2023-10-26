@@ -76,5 +76,5 @@ getPlayMovie(30).then((data) => {
   setTimeout(() => {
     playMovies = data;
     updatePlayCardContent();
-  }, 300);
+  }, 500);
 });

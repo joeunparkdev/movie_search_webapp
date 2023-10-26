@@ -76,5 +76,5 @@ getPopularMovie(30).then((data) => {
   setTimeout(() => {
     popularMovies = data;
     updatePopCardContent();
-  }, 300);
+  }, 500);
 });
