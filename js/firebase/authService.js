@@ -18,15 +18,10 @@ onAuthStateChanged(auth, (user) => {
 
 loginBtn.addEventListener("click", async () => {
   const user = auth.currentUser;
-
   if (user) {
-    // already logged in -> logout
     await googleLogout();
-    loginBtn.textContent = "Login";
   } else {
-    // not logged in -> login
     await googleLogin();
-    loginBtn.textContent = "Logout";
   }
 });
 
