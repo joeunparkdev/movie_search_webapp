@@ -58,7 +58,7 @@ input:focus, textarea:focus {
 
 .score-select {
     display: flex;
-    font-size: 24px;
+    font-size: 16px;
     font-weight: bold;
 }
 
