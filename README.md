@@ -41,7 +41,7 @@
 - 욕설 데이터 배열 저장
 - 검색 유효성 검사 https://github.com/wlduq0150/camp_project_02/blob/4f56c6124d6dc971ddc7b20d377587233ab894fe/js/validation.js#L1
 - 리뷰 유효성 검사 https://github.com/wlduq0150/camp_project_02/blob/4f56c6124d6dc971ddc7b20d377587233ab894fe/js/validation.js#L19C1-L19C1
-- 
+  
 #### 구글 로그인
 
 - firebase를 통한 구글 로그인 // https://github.com/wlduq0150/camp_project_02/blob/main/js/firebase/authService.js#L29
