@@ -4,6 +4,7 @@
 }
 
 .autocomplete-container {
+    display: none;
     margin-left: 7.5%;
 }
 

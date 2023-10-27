@@ -128,6 +128,8 @@ function displayStars(scoreInputValue) {
 function clearReviewStar() {
   scoreSelectStars.forEach((star) => {
     star.textContent = "☆";
+    star.style.fontSize = "24px";
+    star.style.lineHeight = "150%";
   });
   scoreSelect.dataset.value = "0";
 }
@@ -141,6 +143,8 @@ function clickReviewStar(e) {
 
   for (let i=0; i<value; i++) {
     scoreSelectStars[i].textContent = '\u2B50';
+    scoreSelectStars[i].style.fontSize = "20px";
+    scoreSelectStars[i].style.lineHeight = "190%";
   }
   scoreSelect.dataset.value = value;
 }

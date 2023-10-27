@@ -1,9 +1,12 @@
 const autoSearchURL = "https://api.themoviedb.org/3/search/movie?language=ko-KR&query=";
 let dataList = [];
 const $search = document.querySelector("#search");
+const $search_input = document.querySelector(".search_input");
 const $searchButton = document.querySelector("#search-button");
+const autoContainer = document.querySelector(".autocomplete-container");
 const $autoComplete = document.querySelector(".autocomplete-card .autocomplete");
 let selectedAutoSuggestion = 0;
+let isSearchKeywordClick = false;
 
 const fetchMovies = async (url) => {
     try {
@@ -65,9 +68,9 @@ $search.oninput = async () => {
         $autoComplete.style.textAlign = "center";
         const autoSuggestedItems = document.querySelectorAll(".autocomplete > div");
         autoSuggestedItems.forEach((item, index) => {
-            item.addEventListener("click", () => {
+            item.addEventListener("click", (e) => {
                 handleSelection(matchDataList[index]);
-                $autoComplete.innerHTML = ""; // 선택 후 자동완성 숨기기
+                autoContainer.style.display = "none";
             });
         });
     } else {
@@ -77,4 +80,16 @@ $search.oninput = async () => {
 
 $searchButton.addEventListener("click", () => {
     $autoComplete.innerHTML = ""; // 검색 버튼 클릭 후 자동완성 숨기기
+});
+
+$search_input.addEventListener("focus", (e) => {
+    autoContainer.style.display = "block";
+});
+
+window.addEventListener("click", (e) => {
+    if (e.target === $search_input) return;
+
+    if (!e.target.classList.value.includes("auto-search-keyword")) {
+        autoContainer.style.display = "none";
+    }
 });
