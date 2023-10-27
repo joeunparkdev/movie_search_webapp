@@ -62,8 +62,13 @@ $search.oninput = async () => {
         ? dataList.map((movie) => movie.title).filter((title) => title.includes(value))
         : [];
 
+    if (matchDataList.length === 0) {
+        autoContainer.style.display = "none";
+    }
+
     if (matchDataList.length > 0) {
         showList(matchDataList, value, selectedAutoSuggestion);
+        autoContainer.style.display = "block";
         $autoComplete.style.display = "block";
         $autoComplete.style.textAlign = "center";
         const autoSuggestedItems = document.querySelectorAll(".autocomplete > div");
@@ -82,9 +87,9 @@ $searchButton.addEventListener("click", () => {
     $autoComplete.innerHTML = ""; // 검색 버튼 클릭 후 자동완성 숨기기
 });
 
-$search_input.addEventListener("focus", (e) => {
-    autoContainer.style.display = "block";
-});
+// $search_input.addEventListener("focus", (e) => {
+//     autoContainer.style.display = "block";
+// });
 
 window.addEventListener("click", (e) => {
     if (e.target === $search_input) return;
