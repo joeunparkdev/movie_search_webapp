@@ -78,6 +78,9 @@ function addNewReview(reviewData) {
   storedReviews.push(reviewData);
   localStorage.setItem("reviews", JSON.stringify(storedReviews));
   localStorage.setItem("userId", reviewData.id);
+  setTimeout(function(){
+    location.reload();
+    },2000);
 }
 
 // 리뷰 영화별 필터링
@@ -175,6 +178,7 @@ function displayReview(reviewData) {
   );
 
   reviews.appendChild(reviewElement);
+  
 }
 
 // 리뷰 삭제
