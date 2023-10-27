@@ -21,6 +21,10 @@ input:focus {
     outline: none;
 }
 
+.search_result {
+    display: none;
+}
+
 .search_box .search_button {
     height: 40px;
     position: absolute;

@@ -98,41 +98,52 @@ function deleteSearchCard() {
   });
 }
 
-document
-  .querySelector(".search_button")
-  .addEventListener("click", async (e) => {
-    const searchBox = document.querySelector(".search_box input");
-    const title = searchBox.value;
-    // 유효성 검사
-    if (!searchValidationCheck(title)) {
-      searchBox.value = "";
-      return;
-    }
-
-    searchMovies = await getMovies(title);
-
-    document.querySelector(".search_line").style.display = "flex";
-    document.querySelector(
-      ".search_keyword"
-    ).textContent = `"${title}"`;
-
-    if (searchMovies.length === 0) {
-      const noResultsMessage = document.querySelector(".no_results");
-      noResultsMessage.style.display = "block";
-      hideSortButtons();
-    } else {
-      const noResultsMessage = document.querySelector(".no_results");
-      noResultsMessage.style.display = "none";
-      showSortButtons();
-    }
-
-    deleteSearchCard();
-
-    searchMovies.forEach((movie) => {
-      createSearchCard(movie);
-    });
+// 검색 이벤트 함수
+const searchEventHandler = async (e) => {
+  const searchBox = document.querySelector(".search_box input");
+  const title = searchBox.value;
+  // 유효성 검사
+  if (!searchValidationCheck(title)) {
     searchBox.value = "";
+    return;
+  }
+
+  document.querySelector(".search_result").style.display = "block";
+
+  searchMovies = await getMovies(title);
+
+  document.querySelector(".search_line").style.display = "flex";
+  document.querySelector(
+    ".search_keyword"
+  ).textContent = `"${title}"`;
+
+  if (searchMovies.length === 0) {
+    const noResultsMessage = document.querySelector(".no_results");
+    noResultsMessage.style.display = "block";
+    hideSortButtons();
+  } else {
+    const noResultsMessage = document.querySelector(".no_results");
+    noResultsMessage.style.display = "none";
+    showSortButtons();
+  }
+
+  deleteSearchCard();
+
+  searchMovies.forEach((movie) => {
+    createSearchCard(movie);
   });
+  searchBox.value = "";
+};
+
+document.querySelector(".search_button").addEventListener("click", searchEventHandler);
+document.querySelector(".search_input").addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    searchEventHandler(e);
+    document.querySelector(".autocomplete-container").style.display = "none";
+    document.querySelector(".search_input").blur(); 
+  }
+});
 
 //버튼들 숨기기
 function hideSortButtons() {

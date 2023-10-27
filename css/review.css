@@ -62,6 +62,10 @@ input:focus, textarea:focus {
     font-weight: bold;
 }
 
+.score-select-star {
+    cursor: pointer;
+}
+
 .comment_submit {
     margin-top: 10px;
     float: right;
