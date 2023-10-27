@@ -11,18 +11,19 @@
 </head>
 
 <body>
-  <header class="p-1 d-flex flex-wrap align-items-center justify-content-md-between border-bottom border-danger">
+  <header class="p-1 d-flex flex-wrap align-items-center justify-content-between border-bottom border-danger">
     <div class="ms-5 col-md-3">
       <a href="main.html" class="text-decoration-none title text-danger">
-        <p class="fs-30"></p>Flex Movie</p>
+        <p class="fs-30">Flex Movie</p>
       </a>
     </div>
 
     <div class="me-5 col-md-3 text-end">
       <button id='loginBtn' type="button" class="btn btn-outline-danger me-2">Login</button>
-      <button type="button" class="btn btn-danger">Sign-up</button>
+      <a href="favorite-page.html" type="button" class="btn btn-danger">Favorites</a>
     </div>
   </header>
+
 
   <section class="card_section">
     <h1 class="title text-danger detail_look">상세 보기</h1>
@@ -58,6 +59,7 @@
   </section>
 
   <section id='review-section'>
+    <h1 class="review-form-title text-danger">리뷰 기록</h1>
     <form id='review-form'>
       <div class="comment_block">
         <div class="comment_head">
@@ -74,20 +76,18 @@
         </div>
         <div class="comment_head">
           <div class="comment_head_score">
-            <label>점수:</label>
-            <select id='score-select'>
-              <option value='5'>5점</option>
-              <option value='4'>4점</option>
-              <option value='3'>3점</option>
-              <option value='2'>2점</option>
-              <option value='1'>1점</option>
-            </select><br />
+            <div data-value="0" class="score-select">
+              <div class="score-select-star" value="1">☆</div>
+              <div class="score-select-star" value="2">☆</div>
+              <div class="score-select-star" value="3">☆</div>
+              <div class="score-select-star" value="4">☆</div>
+              <div class="score-select-star" value="5">☆</div>
+            </div>
           </div>
           <div>
-            <input class="comment_submit btn btn-outline-danger" type=submit value=Submit>
+            <input class="comment_submit btn btn-danger" type="submit" value="Submit">
           </div>
         </div>
-
       </div>
     </form>
   </section>
@@ -95,6 +95,9 @@
   <section class="review-list-section">
     <h1 class="review-list-title text-danger">리뷰 목록</h1>
     <ul class="reviews-list" id='reviews-list'></ul>
+    <div class="no_results">
+      리뷰를 첫번째로 적어보세요
+    </div>
   </section>
 
 

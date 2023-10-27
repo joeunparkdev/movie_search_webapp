@@ -13,9 +13,8 @@ ul, li {
 
 .comment_block {
     width: 80%;
-
     margin: 0 auto;
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .comment_head {
@@ -32,6 +31,10 @@ ul, li {
     width: 40%;
 
     border-radius: 6px;
+}
+
+input, textarea {
+    padding: 2px;
 }
 
 input:focus, textarea:focus {
@@ -53,6 +56,12 @@ input:focus, textarea:focus {
     resize: none;
 }
 
+.score-select {
+    display: flex;
+    font-size: 24px;
+    font-weight: bold;
+}
+
 .comment_submit {
     margin-top: 10px;
     float: right;
@@ -69,14 +78,28 @@ input:focus, textarea:focus {
     font-weight: bold;
 }
 
+.review-form-title {
+    font-size: 32px;
+    font-weight: bold;
+    width: 80%;
+    margin: 0 auto;
+}
+
+
 .reviews-list {
     padding: 3%;
 }
 
 .user-review {
     padding-bottom: 10px;
-    border-bottom: 1px solid #ff5555;
+    position: relative;
 }
+
+.delete-button, .edit-button {
+    position: absolute; 
+    top: 0
+}
+
 
 .delete-button {
     background-color: #ff5555;
@@ -85,6 +108,8 @@ input:focus, textarea:focus {
     padding: 3px 6px;
     cursor: pointer;
     border-radius: 4px;
+    right: 0; 
+    margin-right: 5px;
 }
 
 .delete-button:hover {
@@ -93,11 +118,13 @@ input:focus, textarea:focus {
 
 .edit-button {
     background-color: #ff5555;
+    right: 36px;
     color: white;
     border: none;
     padding: 3px 6px;
     cursor: pointer;
     border-radius: 4px;
+    margin-right: 30px; 
 }
 
 .edit-button:hover {

@@ -39,10 +39,6 @@ function createFavoriteCard(movie) {
   favoriteCountSpan.classList.add("favorite_count");
   card.appendChild(favoriteCountSpan);
 
-  getFavoriteCount(movie.id).then((count) => {
-    favoriteCountSpan.textContent = `즐겨찾기한 사용자 수: ${count}명`;
-  });
-
   const p = document.createElement("p");
   p.classList.add("movie_overview");
   p.textContent = movie.overview;
@@ -68,6 +64,10 @@ function createFavoriteCard(movie) {
     favoriteIcon = createFavoriteIcon(movie.id);
     card.appendChild(favoriteIcon);
   }
+
+  getFavoriteCount(movie.id).then((count) => {
+    favoriteIcon.textContent += ` ${count}`
+  });
 
   initEventCard(card);
 

@@ -2,7 +2,13 @@ import { getUser } from "./firebase/authService.js";
 
 const reviewForm = document.getElementById("review-form");
 const reviews = document.getElementById("reviews-list");
-const scoreInputValue = getInputValue("score-select");
+const scoreSelect = document.querySelector('.score-select');
+const scoreSelectStars = document.querySelectorAll(".score-select-star");
+scoreSelectStars.forEach((element) => {
+  element.addEventListener("click", (e) => {
+    clickReviewStar(e);
+  });
+});
 
 let storedReviews = loadReviewsFromLocalStorage();
 
@@ -18,7 +24,8 @@ async function handleReviewSubmission(e) {
   const nameInputValue = getInputValue("name");
   const reviewInputValue = getInputValue("review");
   const passwordInputValue = getInputValue("password");
-
+  const scoreInputValue = scoreSelect.dataset.value;
+  
   // 유효성 검사
   if (!commentValidationCheck(reviewInputValue)) {
     resetForm(reviewForm);
@@ -78,7 +85,13 @@ function filterAndDisplayReviews(reviews, movieId) {
   const filteredReviews = reviews.filter(
     (review) => review.movieId === movieId
   );
-
+  if (filteredReviews.length === 0) {
+    const noResultsMessage = document.querySelector(".no_results");
+    noResultsMessage.style.display = "block"; 
+  } else {
+    const noResultsMessage = document.querySelector(".no_results");
+    noResultsMessage.style.display = "none"; 
+  }
   for (const review of filteredReviews) {
     displayReview(review);
   }
@@ -104,18 +117,47 @@ async function hashPassword(password) {
   }
 }
 
+//별표 (최대 5개) 표시
+function displayStars(scoreInputValue) {
+  const starCharacter = '\u2B50'; // 별 이모티콘 유니코드 (⭐)
+  const stars = new Array(5).fill(starCharacter).fill(' ', scoreInputValue, 5).join('');
+  return stars;
+}
+
+// 리뷰 별 선택 초기화
+function clearReviewStar() {
+  scoreSelectStars.forEach((star) => {
+    star.textContent = "☆";
+  });
+  scoreSelect.dataset.value = "0";
+}
+
+// 리뷰 별 클릭 이벤트
+function clickReviewStar(e) {
+  const target = e.currentTarget;
+  const value = target.getAttribute("value");
+
+  clearReviewStar();
+
+  for (let i=0; i<value; i++) {
+    scoreSelectStars[i].textContent = '\u2B50';
+  }
+  scoreSelect.dataset.value = value;
+}
+
 // 리뷰 보여주기
 function displayReview(reviewData) {
   const reviewElement = document.createElement("div");
   reviewElement.classList.add("user-review");
+  const stars = displayStars(reviewData.score); 
   reviewElement.innerHTML = `
     <strong class="writer">${reviewData.name}</strong><br>
     <span class="review-text">${reviewData.reviewText}</span><br>
-    <span class="rating">${reviewData.score}</span><br>
+    <span class="rating text-danger">${stars}</span><br>
     <button class="delete-button">Delete</button>
     <button class="edit-button">Edit</button>
   `;
-
+  
   // 삭제 버튼 정의
   const deleteButton = reviewElement.querySelector(".delete-button");
 
@@ -207,4 +249,5 @@ async function handleEditClick(reviewData, reviewElement) {
 // 초기화
 function resetForm(formElement) {
   formElement.reset();
+  clearReviewStar();
 }
