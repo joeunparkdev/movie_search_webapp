@@ -78,9 +78,7 @@ function addNewReview(reviewData) {
   storedReviews.push(reviewData);
   localStorage.setItem("reviews", JSON.stringify(storedReviews));
   localStorage.setItem("userId", reviewData.id);
-  setTimeout(function(){
-    location.reload();
-    },2000);
+  history.go(0)
 }
 
 // 리뷰 영화별 필터링
