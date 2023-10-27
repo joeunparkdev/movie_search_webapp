@@ -15,8 +15,6 @@
 
 # 주요 기능
 
-#### 멤버 소개
-
 - hover 이벤트 및 파이어베이스 프로필 데이터 불러오기
 
 #### 댓글 쓰기
@@ -39,7 +37,8 @@
 
 #### 개인 리뷰 작성
 
-- 리뷰 영화별 필터링 https://github.com/wlduq0150/camp_project_02/blob/6d55cc84cc05227ff086c7b3e70bc797029f4967/js/review.js#L85C40-L85C40
+- 리뷰 영화별 필터링 https://github.com/wlduq0150/camp_project_02/blob/6d55cc84cc05227ff086c7b3e70bc797029f4967/js/review.js#L85C40
+- -L85C40(https://github.com/wlduq0150/camp_project_02/blob/6d55cc84cc05227ff086c7b3e70bc797029f4967/js/review.js#L85C40-L85C40
 - 리뷰 생성 https://github.com/wlduq0150/camp_project_02/blob/6d55cc84cc05227ff086c7b3e70bc797029f4967/js/review.js#L76C24-L76C24
 - 리뷰 표시 https://github.com/wlduq0150/camp_project_02/blob/6d55cc84cc05227ff086c7b3e70bc797029f4967/js/review.js#L154
 - 리뷰 삭제 https://github.com/wlduq0150/camp_project_02/blob/6d55cc84cc05227ff086c7b3e70bc797029f4967/js/review.js#L187
