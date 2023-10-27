@@ -16,11 +16,8 @@
 # 주요 기능
 
 - hover 이벤트 및 파이어베이스 프로필 데이터 불러오기
-
-#### 댓글 쓰기
-
-- 비밀번호 암호화
-- 현재 시간을 ID로 변환 (ID 겹침 방지)
+- 댓글 작성시 비밀번호 암호화
+- 댓글 작성시 현재 시간을 ID로 변환 (ID 겹침 방지)
 - 파이어베이스에 댓글 데이터 저장
 
 #### 영화 검색 정렬
@@ -32,13 +29,11 @@
 #### 영화 상세페이지
 
 - 영화 id url 파라미터를 통해 상세페이지 이동 및 api 요청 
-- 영화 상세정보 표시하기
-- https://github.com/wlduq0150/camp_project_02/blob/6d55cc84cc05227ff086c7b3e70bc797029f4967/js/detail-page.js#L5
+- 영화 상세정보 표시하기 https://github.com/wlduq0150/camp_project_02/blob/6d55cc84cc05227ff086c7b3e70bc797029f4967/js/detail-page.js#L5
 
 #### 개인 리뷰 작성
 
 - 리뷰 영화별 필터링 https://github.com/wlduq0150/camp_project_02/blob/6d55cc84cc05227ff086c7b3e70bc797029f4967/js/review.js#L85C40
-- -L85C40(https://github.com/wlduq0150/camp_project_02/blob/6d55cc84cc05227ff086c7b3e70bc797029f4967/js/review.js#L85C40-L85C40
 - 리뷰 생성 https://github.com/wlduq0150/camp_project_02/blob/6d55cc84cc05227ff086c7b3e70bc797029f4967/js/review.js#L76C24-L76C24
 - 리뷰 표시 https://github.com/wlduq0150/camp_project_02/blob/6d55cc84cc05227ff086c7b3e70bc797029f4967/js/review.js#L154
 - 리뷰 삭제 https://github.com/wlduq0150/camp_project_02/blob/6d55cc84cc05227ff086c7b3e70bc797029f4967/js/review.js#L187
