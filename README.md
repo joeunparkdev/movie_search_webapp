@@ -51,7 +51,7 @@
 
 - firebase를 통한 구글 로그인 https://github.com/wlduq0150/camp_project_02/blob/main/js/firebase/authService.js#L29
 - 로그인 상태 체크 https://github.com/wlduq0150/camp_project_02/blob/main/js/firebase/authService.js#L54
-- 로그인 상태에 따른 login 버튼 변화 // https://github.com/wlduq0150/camp_project_02/blob/main/js/firebase/authService.js#L19
+- 로그인 상태에 따른 login 버튼 변화 https://github.com/wlduq0150/camp_project_02/blob/main/js/firebase/authService.js#L19
 
 #### 자동 검색어
 
