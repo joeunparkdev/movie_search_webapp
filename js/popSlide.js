@@ -1,5 +1,6 @@
 import { auth } from "./firebase/firebaseConfig.js";
 import { createFavoriteIcon } from "./firebase/databaseService.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
 
 let popularMovies = [];
 let currentPopShow = 0;
@@ -72,9 +73,9 @@ document
     updatePopCardContent();
   });
 
-getPopularMovie(30).then((data) => {
-  setTimeout(() => {
+onAuthStateChanged(auth, () => {
+  getPopularMovie(30).then((data) => {
     popularMovies = data;
     updatePopCardContent();
-  }, 500);
+  });
 });

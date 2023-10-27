@@ -10,3 +10,6 @@ main {
     font-weight: bold;
 }
 
+.delAllFavBtn {
+    float: right;
+}

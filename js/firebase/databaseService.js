@@ -7,13 +7,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
 import { auth } from "./firebaseConfig.js";
 
-async function getFavoriteMovies(userId) {
+export async function getFavoriteMovies(userId) {
   const dbRef = ref(getDatabase());
   const snapshot = await get(
     child(dbRef, `users/${userId}/favorites`)
   );
   if (snapshot.exists()) {
-    return snapshot.val();
+    const data = snapshot.val();
+    return Array.isArray(data) ? data : [];
   } else {
     return [];
   }
@@ -76,6 +77,7 @@ export function createFavoriteIcon(movieId) {
           movieId,
           false
         ).then(() => {
+          window.location.reload();
           favoriteIcon.textContent = "♡";
         });
       }
@@ -83,4 +85,37 @@ export function createFavoriteIcon(movieId) {
   });
 
   return favoriteIcon;
+}
+
+export async function getFavoriteCount(movieId) {
+  const dbRef = ref(getDatabase());
+  const usersSnapshot = await get(child(dbRef, "users"));
+  let count = 0;
+
+  if (usersSnapshot.exists()) {
+    const usersData = usersSnapshot.val();
+    const userIds = Object.keys(usersData);
+
+    for (let userId of userIds) {
+      const favoritesSnapshot = await get(
+        child(dbRef, `users/${userId}/favorites`)
+      );
+
+      if (favoritesSnapshot.exists()) {
+        const favoritesData = favoritesSnapshot.val();
+        if (
+          Array.isArray(favoritesData) &&
+          favoritesData.includes(movieId)
+        ) {
+          count++;
+        }
+      }
+    }
+  }
+
+  return count;
+}
+
+export async function removeAllFavoriteMovies(userId) {
+  await set(ref(getDatabase(), `users/${userId}/favorites`), []);
 }

@@ -1,15 +1,18 @@
+import { getUser } from "./firebase/authService.js";
+
 const reviewForm = document.getElementById("review-form");
 const reviews = document.getElementById("reviews-list");
-const scoreSelect = document.getElementById('score-select');
-let scoreInputValue = 5; // Default
-scoreSelect.addEventListener('change', function() {
-  scoreInputValue = this.value; 
+const scoreSelect = document.querySelector('.score-select');
+const scoreSelectStars = document.querySelectorAll(".score-select-star");
+scoreSelectStars.forEach((element) => {
+  element.addEventListener("click", (e) => {
+    clickReviewStar(e);
+  });
 });
 
 let storedReviews = loadReviewsFromLocalStorage();
 
 const movieId = getMovieIdFromUrl();
-let nextId = parseInt(localStorage.getItem("nextId")) || 1;
 
 filterAndDisplayReviews(storedReviews, movieId);
 
@@ -21,7 +24,8 @@ async function handleReviewSubmission(e) {
   const nameInputValue = getInputValue("name");
   const reviewInputValue = getInputValue("review");
   const passwordInputValue = getInputValue("password");
-
+  const scoreInputValue = scoreSelect.dataset.value;
+  
   // 유효성 검사
   if (!commentValidationCheck(reviewInputValue)) {
     resetForm(reviewForm);
@@ -30,10 +34,16 @@ async function handleReviewSubmission(e) {
 
   const hashedPassword = await hashPassword(passwordInputValue);
 
-  nextId++;
+  const user = getUser();
+  const userId = user ? user.uid : null;
+
+  if (!userId) {
+    alert("로그인이 필요합니다.");
+    return;
+  }
 
   const newReviewData = {
-    id: nextId,
+    id: userId,
     movieId: movieId,
     name: nameInputValue,
     reviewText: reviewInputValue,
@@ -67,7 +77,7 @@ function addNewReview(reviewData) {
   displayReview(reviewData);
   storedReviews.push(reviewData);
   localStorage.setItem("reviews", JSON.stringify(storedReviews));
-  localStorage.setItem("nextId", nextId.toString());
+  localStorage.setItem("userId", reviewData.id);
 }
 
 // 리뷰 영화별 필터링
@@ -114,16 +124,36 @@ function displayStars(scoreInputValue) {
   return stars;
 }
 
+// 리뷰 별 선택 초기화
+function clearReviewStar() {
+  scoreSelectStars.forEach((star) => {
+    star.textContent = "☆";
+  });
+  scoreSelect.dataset.value = "0";
+}
+
+// 리뷰 별 클릭 이벤트
+function clickReviewStar(e) {
+  const target = e.currentTarget;
+  const value = target.getAttribute("value");
+
+  clearReviewStar();
+
+  for (let i=0; i<value; i++) {
+    scoreSelectStars[i].textContent = '\u2B50';
+  }
+  scoreSelect.dataset.value = value;
+}
+
 // 리뷰 보여주기
 function displayReview(reviewData) {
   const reviewElement = document.createElement("div");
   reviewElement.classList.add("user-review");
   const stars = displayStars(reviewData.score); 
-  console.log(scoreInputValue);
   reviewElement.innerHTML = `
     <strong class="writer">${reviewData.name}</strong><br>
     <span class="review-text">${reviewData.reviewText}</span><br>
-    <span class="rating">${stars}</span><br>
+    <span class="rating text-danger">${stars}</span><br>
     <button class="delete-button">Delete</button>
     <button class="edit-button">Edit</button>
   `;
@@ -219,4 +249,5 @@ async function handleEditClick(reviewData, reviewElement) {
 // 초기화
 function resetForm(formElement) {
   formElement.reset();
+  clearReviewStar();
 }

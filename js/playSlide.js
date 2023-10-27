@@ -1,5 +1,6 @@
 import { auth } from "./firebase/firebaseConfig.js";
 import { createFavoriteIcon } from "./firebase/databaseService.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
 
 let playMovies = [];
 let currentPlayShow = 0;
@@ -72,9 +73,9 @@ document
     updatePlayCardContent();
   });
 
-getPlayMovie(30).then((data) => {
-  setTimeout(() => {
+onAuthStateChanged(auth, () => {
+  getPlayMovie(30).then((data) => {
     playMovies = data;
     updatePlayCardContent();
-  }, 500);
+  });
 });

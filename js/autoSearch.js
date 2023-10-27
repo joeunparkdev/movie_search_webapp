@@ -37,7 +37,7 @@ const showList = (data, value, selectedAutoSuggestion) => {
     $autoComplete.innerHTML = data
         .map(
             (title, index) => `
-            <div class="${selectedAutoSuggestion === index ? "active" : ""}">
+            <div class="auto-search-keyword ${selectedAutoSuggestion === index ? "active" : ""}">
                 ${title.replace(regex, "<mark>$1</mark>")}
             </div>
         `

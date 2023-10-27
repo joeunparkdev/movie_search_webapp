@@ -33,6 +33,10 @@ ul, li {
     border-radius: 6px;
 }
 
+input, textarea {
+    padding: 2px;
+}
+
 input:focus, textarea:focus {
     outline: none;
 }
@@ -50,6 +54,12 @@ input:focus, textarea:focus {
     border-radius: 6px;
 
     resize: none;
+}
+
+.score-select {
+    display: flex;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 .comment_submit {
