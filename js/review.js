@@ -1,6 +1,10 @@
 const reviewForm = document.getElementById("review-form");
 const reviews = document.getElementById("reviews-list");
-const scoreInputValue = getInputValue("score-select");
+const scoreSelect = document.getElementById('score-select');
+let scoreInputValue = 5; // Default
+scoreSelect.addEventListener('change', function() {
+  scoreInputValue = this.value; 
+});
 
 let storedReviews = loadReviewsFromLocalStorage();
 
@@ -107,7 +111,6 @@ async function hashPassword(password) {
 function displayStars(scoreInputValue) {
   const starCharacter = '\u2B50'; // 별 이모티콘 유니코드 (⭐)
   const stars = new Array(5).fill(starCharacter).fill(' ', scoreInputValue, 5).join('');
-
   return stars;
 }
 
@@ -116,6 +119,7 @@ function displayReview(reviewData) {
   const reviewElement = document.createElement("div");
   reviewElement.classList.add("user-review");
   const stars = displayStars(reviewData.score); 
+  console.log(scoreInputValue);
   reviewElement.innerHTML = `
     <strong class="writer">${reviewData.name}</strong><br>
     <span class="review-text">${reviewData.reviewText}</span><br>
