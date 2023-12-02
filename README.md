@@ -1,4 +1,4 @@
-# camp_project_02
+# movie_search_webapp
 
 영화 추천 웹사이트
 
